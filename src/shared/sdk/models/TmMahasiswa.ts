@@ -5,22 +5,28 @@ export interface TmMahasiswaInterface {
   "id"?: number;
   "nim": string;
   "nama": string;
+  "email": string;
+  "pictures": string;
   "jeniskelamin": string;
   "alamat": string;
   "ttl": string;
   "jenjang": string;
   "tanggalmasuk"?: Date;
+  "jurusan": string;
 }
 
 export class TmMahasiswa implements TmMahasiswaInterface {
   "id": number;
   "nim": string;
   "nama": string;
+  "email": string;
+  "pictures": string;
   "jeniskelamin": string;
   "alamat": string;
   "ttl": string;
   "jenjang": string;
   "tanggalmasuk": Date;
+  "jurusan": string;
   constructor(data?: TmMahasiswaInterface) {
     Object.assign(this, data);
   }
@@ -64,6 +70,14 @@ export class TmMahasiswa implements TmMahasiswaInterface {
           name: 'nama',
           type: 'string'
         },
+        "email": {
+          name: 'email',
+          type: 'string'
+        },
+        "pictures": {
+          name: 'pictures',
+          type: 'string'
+        },
         "jeniskelamin": {
           name: 'jeniskelamin',
           type: 'string'
@@ -83,6 +97,10 @@ export class TmMahasiswa implements TmMahasiswaInterface {
         "tanggalmasuk": {
           name: 'tanggalmasuk',
           type: 'Date'
+        },
+        "jurusan": {
+          name: 'jurusan',
+          type: 'string'
         },
       },
       relations: {
