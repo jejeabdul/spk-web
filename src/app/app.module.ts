@@ -1,3 +1,5 @@
+import { EditMhsPage } from './../pages/mahasiswa/edit-mhs/edit-mhs';
+import { AddMhsPage } from './../pages/mahasiswa/add-mhs/add-mhs';
 import { ChatPage } from './../pages/chat/chat';
 import { MyCalendarPage } from './../pages/my-calendar/my-calendar';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
@@ -37,7 +39,9 @@ import { Moment } from './../components/pipes/moment';
     MonthViewComponent,
     WeekViewComponent,
     DayViewComponent,
-    ChatPage
+    ChatPage,
+    AddMhsPage,
+    EditMhsPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,9 @@ import { Moment } from './../components/pipes/moment';
     MonthViewComponent,
     WeekViewComponent,
     DayViewComponent,
-    ChatPage
+    ChatPage,
+    AddMhsPage,
+    EditMhsPage
   ],
   providers: [
     StatusBar,
