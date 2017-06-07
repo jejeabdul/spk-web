@@ -2,31 +2,37 @@
 
 declare var Object: any;
 export interface TmMahasiswaInterface {
-  "id"?: number;
   "nim": string;
+  "userid": number;
   "nama": string;
-  "email": string;
-  "pictures": string;
-  "jeniskelamin": string;
-  "alamat": string;
-  "ttl": string;
-  "jenjang": string;
-  "tanggalmasuk"?: Date;
-  "jurusan": string;
+  "email"?: string;
+  "pictures"?: string;
+  "jenisKelamin"?: string;
+  "alamat"?: string;
+  "ttl"?: string;
+  "jenjang"?: string;
+  "tanggalMasuk"?: Date;
+  "jurusan"?: string;
+  "createddate"?: Date;
+  "id"?: number;
+  "telephone"?: string;
 }
 
 export class TmMahasiswa implements TmMahasiswaInterface {
-  "id": number;
   "nim": string;
+  "userid": number;
   "nama": string;
   "email": string;
   "pictures": string;
-  "jeniskelamin": string;
+  "jenisKelamin": string;
   "alamat": string;
   "ttl": string;
   "jenjang": string;
-  "tanggalmasuk": Date;
+  "tanggalMasuk": Date;
   "jurusan": string;
+  "createddate": Date;
+  "id": number;
+  "telephone": string;
   constructor(data?: TmMahasiswaInterface) {
     Object.assign(this, data);
   }
@@ -58,13 +64,13 @@ export class TmMahasiswa implements TmMahasiswaInterface {
       name: 'TmMahasiswa',
       plural: 'TmMahasiswas',
       properties: {
-        "id": {
-          name: 'id',
-          type: 'number'
-        },
         "nim": {
           name: 'nim',
           type: 'string'
+        },
+        "userid": {
+          name: 'userid',
+          type: 'number'
         },
         "nama": {
           name: 'nama',
@@ -78,8 +84,8 @@ export class TmMahasiswa implements TmMahasiswaInterface {
           name: 'pictures',
           type: 'string'
         },
-        "jeniskelamin": {
-          name: 'jeniskelamin',
+        "jenisKelamin": {
+          name: 'jenisKelamin',
           type: 'string'
         },
         "alamat": {
@@ -94,12 +100,24 @@ export class TmMahasiswa implements TmMahasiswaInterface {
           name: 'jenjang',
           type: 'string'
         },
-        "tanggalmasuk": {
-          name: 'tanggalmasuk',
+        "tanggalMasuk": {
+          name: 'tanggalMasuk',
           type: 'Date'
         },
         "jurusan": {
           name: 'jurusan',
+          type: 'string'
+        },
+        "createddate": {
+          name: 'createddate',
+          type: 'Date'
+        },
+        "id": {
+          name: 'id',
+          type: 'number'
+        },
+        "telephone": {
+          name: 'telephone',
           type: 'string'
         },
       },

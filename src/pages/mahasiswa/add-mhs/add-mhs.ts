@@ -1,3 +1,4 @@
+import { AuthApi } from './../../../shared/sdk/services/custom/Auth';
 import { TmMahasiswaApi } from './../../../shared/sdk/services/custom/TmMahasiswa';
 // import { ValidationService } from './../../../components/validation.service';
 import { Component } from '@angular/core';
@@ -23,7 +24,8 @@ export class AddMhsPage {
     public tmMahasiswaApi: TmMahasiswaApi,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    public events: Events
+    public events: Events,
+    public authApi: AuthApi
   ) {
     this.myForm = fb.group({
       'txtNIM': ['', Validators.required],
@@ -46,16 +48,17 @@ export class AddMhsPage {
       content: 'Loading...'
     });
     loading.present();
+    
     console.log(data, 'data mhs');
-    this.tmMahasiswaApi.create({
+    this.authApi.doAddMhs({
       nim: data.txtNIM,
       nama: data.txtNama,
       // email: data.txtEmail,
       ttl: data.txtTTL,
       pictures: '',
-      jeniskelamin: data.selJK,
+      jenisKelamin: data.selJK,
       jenjang: data.selJenjang,
-      tanggalmasuk: data.selTglMasuk,
+      tanggalMasuk: data.selTglMasuk,
       jurusan: 'Teknik Informatika'
     }).subscribe(value => {
       loading.dismiss().then(

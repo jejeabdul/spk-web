@@ -24,7 +24,7 @@ import { NavController, NavParams, Nav, LoadingController } from 'ionic-angular'
 })
 export class MenuPage {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = MyCalendarPage;
+  rootPage: any = MahasiswaPage;
   pages: Array<{ title: string, component: any, icons: any, show: boolean }>;
   constructor(
     public navCtrl: NavController,
@@ -51,7 +51,7 @@ export class MenuPage {
       { title: 'Home', component: HomePage, icons: 'home', show: true },
       { title: 'Dosen Pembimbing', component: DosenPage, icons: 'people', show: true },
       { title: 'Mahasiswa', component: MahasiswaPage, icons: 'contacts', show: true },
-      { title: 'Jurnal', component: JurnalPage, icons: 'book', show: true },
+      { title: 'Data Pegawai', component: JurnalPage, icons: 'contact', show: true },
       { title: 'My Calendar', component: MyCalendarPage, icons: 'calendar', show: true },
       { title: 'Chat', component: ChatPage, icons: 'chatbubbles', show: true },
       { title: 'Pengaturan', component: SettingsPage, icons: 'settings', show: true }
