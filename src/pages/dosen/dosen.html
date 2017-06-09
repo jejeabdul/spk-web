@@ -12,32 +12,54 @@
     </button>
     <ion-title>Dosen Pembimbing</ion-title>
   </ion-navbar>
-
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="textSearchMember" (ionInput)="searchList($event)"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content no-padding>
-  <ion-list>
+  <ion-grid>
     <ion-item-divider>
       List Dosen
     </ion-item-divider>
-    <ion-col col-6 col-sm>
-      <ion-card>
-        <ion-card-content style="text-align:center">
-          <img src="assets/img/no-photo.gif" onerror="this.src='assets/img/no-image-community.png'" style="border-radius:60%;width: 8em; height: 8em;margin-left:15px;"
-          />
-          <ion-label>Drs. abc</ion-label>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col col-6 col-sm>
-      <ion-card>
-        <ion-card-content style="text-align:center">
-          <img src="assets/img/no-photo.gif" onerror="this.src='assets/img/no-image-community.png'" style="border-radius:60%;width: 8em; height: 8em;margin-left:15px;"
-          />
-          <ion-label>Drs. abc</ion-label>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-list>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+        </ion-col>
+        <ion-col>
+          <b>NIK</b>
+        </ion-col>
+        <ion-col>
+          <b>Nama Dosen</b>
+        </ion-col>
+        <ion-col>
+          <b>Action</b>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-avatar item-left>
+            <img src="assets/img/no-photo.gif" onerror="this.src='assets/img/no-photo.gif'" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+          <p></p>
+        </ion-col>
+        <ion-col>
+          <P></P>
+        </ion-col>
+        <ion-col>
+          <button ion-button outline item-end><ion-icon name="create"></ion-icon></button>
+          <button ion-button outline item-end><ion-icon name="trash"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-grid>
+
+   <ion-fab bottom right>
+    <button ion-fab mini (click)="AddDosen();"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
