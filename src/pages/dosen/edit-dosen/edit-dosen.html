@@ -1,0 +1,80 @@
+<!--
+  Generated template for the AddMhsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Form Edit Dosen</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="myForm" (ngSubmit)="EditDosen(myForm.value)">
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" stacked>NIDN</ion-label>
+        <ion-input type="text" placeholder="NIDN Input" formControlName="txtNIDN"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" stacked>Nama</ion-label>
+        <ion-input type="text" placeholder="Nama Input" formControlName="txtNama"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" stacked>No Telepon</ion-label>
+        <ion-input type="text" placeholder="No telepon Input" formControlName="txtTelepon"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" stacked>Pendidikan</ion-label>
+        <ion-select [(ngModel)]="jenjang" placeholder="Pendidikan Select" formControlName="jenjang">
+          <ion-option value="D3">D3</ion-option>
+          <ion-option value="S1">S1</ion-option>
+          <ion-option value="S2">S2</ion-option>
+          <ion-option value="S3">S3</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" stacked>Tempat, Tanggal Lahir</ion-label>
+        <ion-input type="text" placeholder="TTL Input" formControlName="txtTTL"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" stacked>Jenis Kelamin</ion-label>
+        <ion-select [(ngModel)]="gender" placeholder="Jenis Kelamin Select" formControlName="jk">
+          <ion-option value="L">Laki-laki</ion-option>
+          <ion-option value="P">Perempuan</ion-option>
+        </ion-select>
+      </ion-item>
+
+       <ion-item>
+        <ion-label color="primary" stacked>Kuota</ion-label>
+        <ion-input type="text" placeholder="Kuota Input" formControlName="txtKuota"></ion-input>
+      </ion-item>
+
+       <ion-item>
+        <ion-label color="primary" stacked>Kompetensi</ion-label>
+        <ion-input type="text" placeholder="Kompetensi Input" formControlName="txtKompetensi"></ion-input>
+      </ion-item>
+
+      <ion-item>
+      <ion-label color="primary" stacked>Alamat</ion-label>
+      <ion-textarea placeholder="Alamat Input" formControlName="alamat"></ion-textarea>
+    </ion-item>
+
+       <ion-item>
+        <ion-label color="primary" stacked>Fungsional</ion-label>
+        <ion-input type="text" placeholder="Fungsional Input" formControlName="txtFungsional"></ion-input>
+      </ion-item>
+
+    </ion-list>
+    <button ion-button round [disabled]="!myForm.valid">Update</button>
+  </form>
+</ion-content>

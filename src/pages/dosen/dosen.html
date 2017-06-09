@@ -1,5 +1,5 @@
 <!--
-  Generated template for the DosenPage page.
+  Generated template for the MahasiswaPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -18,48 +18,51 @@
 </ion-header>
 
 
-<ion-content no-padding>
+<ion-content padding>
   <ion-grid>
     <ion-item-divider>
-      List Dosen
+      List Dosen Pembimbing
     </ion-item-divider>
     <ion-item>
       <ion-row>
         <ion-col>
         </ion-col>
         <ion-col>
-          <b>NIK</b>
+          <b>NIDN</b>
         </ion-col>
         <ion-col>
-          <b>Nama Dosen</b>
+          <b>Nama</b>
         </ion-col>
         <ion-col>
           <b>Action</b>
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item>
+    <ion-item *ngFor="let item of items">
       <ion-row>
         <ion-col>
           <ion-avatar item-left>
-            <img src="assets/img/no-photo.gif" onerror="this.src='assets/img/no-photo.gif'" />
+            <img src="assets/img/{{item.pictures}}" onerror="this.src='assets/img/no-photo.gif'" />
           </ion-avatar>
         </ion-col>
         <ion-col>
-          <p></p>
+          <p>{{item.nidn}}</p>
         </ion-col>
         <ion-col>
-          <P></P>
+          <P>{{item.nama}}</P>
         </ion-col>
         <ion-col>
           <button ion-button outline item-end><ion-icon name="create"></ion-icon></button>
-          <button ion-button outline item-end><ion-icon name="trash"></ion-icon></button>
+          <button ion-button outline item-end (click)="delete(item)"><ion-icon name="trash"></ion-icon></button>
         </ion-col>
       </ion-row>
     </ion-item>
   </ion-grid>
-
-   <ion-fab bottom right>
+  <ion-fab bottom right>
     <button ion-fab mini (click)="AddDosen();"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
+  <!--infinit -->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -1,3 +1,5 @@
+import { EditDosenPage } from './../pages/dosen/edit-dosen/edit-dosen';
+import { AddDosenPage } from './../pages/dosen/add-dosen/add-dosen';
 import { EditMhsPage } from './../pages/mahasiswa/edit-mhs/edit-mhs';
 import { AddMhsPage } from './../pages/mahasiswa/add-mhs/add-mhs';
 import { ChatPage } from './../pages/chat/chat';
@@ -41,7 +43,9 @@ import { Moment } from './../components/pipes/moment';
     DayViewComponent,
     ChatPage,
     AddMhsPage,
-    EditMhsPage
+    EditMhsPage,
+    AddDosenPage,
+    EditDosenPage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,9 @@ import { Moment } from './../components/pipes/moment';
     DayViewComponent,
     ChatPage,
     AddMhsPage,
-    EditMhsPage
+    EditMhsPage,
+    AddDosenPage,
+    EditDosenPage
   ],
   providers: [
     StatusBar,
