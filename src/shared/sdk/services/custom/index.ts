@@ -1,6 +1,5 @@
 /* tslint:disable */
 export * from './Auth';
-export * from './Accesstoken';
 export * from './Rolemapping';
 export * from './Container';
 export * from './TmMahasiswa';

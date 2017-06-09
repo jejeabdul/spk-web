@@ -45,7 +45,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
 import { AuthApi } from './services/custom/Auth';
-import { AccesstokenApi } from './services/custom/Accesstoken';
 import { RolemappingApi } from './services/custom/Rolemapping';
 import { ContainerApi } from './services/custom/Container';
 import { TmMahasiswaApi } from './services/custom/TmMahasiswa';
@@ -88,7 +87,6 @@ export class SDKBrowserModule {
         JSONSearchParams,
         SDKModels,
         AuthApi,
-        AccesstokenApi,
         RolemappingApi,
         ContainerApi,
         TmMahasiswaApi,
