@@ -1,0 +1,26 @@
+<ion-content padding style="background-image: url('assets/img/hijauabu.jpg')" page-sign-in>
+  <br><br>
+  <div text-center>
+    <img src="assets/img/UMJ.png" width="120px" height="120px">
+    <h2 style="color:white">Fakultas Teknik Informatika</h2>
+  </div>
+
+  <form [formGroup]="myForm" (ngSubmit)="goLogin(myForm.value)">
+    <ion-item>
+      <img src="assets/auth/name-member.png" item-left style="width:45px; height:45px;">
+      <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
+    </ion-item>
+    <ion-item [hidden]="showpass == true">
+      <img src="assets/auth/password-member.png" item-left [hidden]="showpass == true" style="width:45px; height:45px;">
+      <ion-input type="password" #pass formControlName="password" (keyup)="onKey(pass.value)" [hidden]="showpass == true" placeholder="Password"></ion-input>
+    </ion-item>
+    <ion-item [hidden]="showpass == false">
+      <img src="assets/auth/password-member.png" item-left [hidden]="showpass == false" style="width:45px; height:45px;">
+      <ion-input type="text" formControlName="password" placeholder="Password" value="{{values}}"></ion-input>
+    </ion-item>
+    <br>
+    <button ion-button block color="secondary" [disabled]="!myForm.valid">Sign In</button>
+    <br>
+    <!--<div text-center><a (click)="goForgotPassword();">Forgot Password?</a></div>-->
+  </form>
+</ion-content>

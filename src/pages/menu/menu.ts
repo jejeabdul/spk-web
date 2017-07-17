@@ -1,6 +1,8 @@
+import { TmMahasiswaApi } from './../../shared/sdk/services/custom/TmMahasiswa';
+import { SignInPage } from './../sign-in/sign-in';
+import { KlasifikasiPage } from './../klasifikasi/klasifikasi';
 import { ChatPage } from './../chat/chat';
 import { MyCalendarPage } from './../my-calendar/my-calendar';
-import { JurnalPage } from './../jurnal/jurnal';
 import { SettingsPage } from './../settings/settings';
 import { MahasiswaPage } from './../mahasiswa/mahasiswa';
 import { DosenPage } from './../dosen/dosen';
@@ -8,6 +10,7 @@ import { HomePage } from './../home/home';
 // plugin
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 // page
 
@@ -23,15 +26,21 @@ import { NavController, NavParams, Nav, LoadingController } from 'ionic-angular'
   templateUrl: 'menu.html',
 })
 export class MenuPage {
+  setPictures: any;
+  setNama: any;
+  setNim: any;
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = MahasiswaPage;
+  rootPage: any = HomePage;
   pages: Array<{ title: string, component: any, icons: any, show: boolean }>;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public tmMahasiswaApi: TmMahasiswaApi,
+    public storage: Storage,
   ) {
     this.loadMenu();
+    this.loadMhs();
   }
 
   ionViewDidLoad() {
@@ -46,12 +55,12 @@ export class MenuPage {
 
     // loading.dismiss().then(
     //   value => {
-    
+
     this.pages = [
       { title: 'Home', component: HomePage, icons: 'home', show: true },
       { title: 'Dosen Pembimbing', component: DosenPage, icons: 'people', show: true },
       { title: 'Mahasiswa', component: MahasiswaPage, icons: 'contacts', show: true },
-      { title: 'Data Pegawai', component: JurnalPage, icons: 'contact', show: true },
+      { title: 'Klasifikasi', component: KlasifikasiPage, icons: 'contact', show: true },
       { title: 'My Calendar', component: MyCalendarPage, icons: 'calendar', show: true },
       { title: 'Chat', component: ChatPage, icons: 'chatbubbles', show: true },
       { title: 'Pengaturan', component: SettingsPage, icons: 'settings', show: true }
@@ -64,4 +73,17 @@ export class MenuPage {
     this.nav.setRoot(page.component);
   }
 
+  loadMhs() {
+    this.storage.get('stuserid').then((stuserid) => {
+      this.tmMahasiswaApi.find({
+        where: { userid: stuserid }
+      }).subscribe(val => {
+        if (val) {
+          this.setPictures = val[0]['pictures'];
+          this.setNama = val[0]['nama'];
+          this.setNim = val[0]['nim'];
+        }
+      });
+    });
+  }
 }

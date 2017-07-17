@@ -21,15 +21,15 @@
   <ion-list>
     <ion-item-divider>
     </ion-item-divider>
-    <button ion-item>
+    <button ion-item (click)="goProfile()">
       <ion-icon name="person" item-left style="color: grey;"></ion-icon>
       <ion-label>My Profile</ion-label>
     </button>
-    <button ion-item>
+    <button ion-item (click)="goChangePassword()">
       <ion-icon name="contact" item-left style="color: grey;"></ion-icon>
-      <ion-label>Tentang Kami</ion-label>
+      <ion-label>Change Password</ion-label>
     </button>
-    <button ion-item>
+    <button ion-item (click)="goLogout();">
       <ion-icon name="log-out" item-left style="color: grey;"></ion-icon>
       <ion-label>Sign Out</ion-label>
     </button>

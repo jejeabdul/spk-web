@@ -30,11 +30,14 @@ export class AddMhsPage {
     this.myForm = fb.group({
       'txtNIM': ['', Validators.required],
       'txtNama': ['', Validators.required],
-      // 'txtEmail': ['', Validators.compose([Validators.required, ValidationService.emailValidator])],
+      'txtTelepon': ['', Validators.required],
       'txtTTL': ['', Validators.required],
       'selJK': ['', Validators.required],
-      'selJenjang': ['', Validators.required],
-      'selTglMasuk': ['', Validators.required]
+      'txtTahunMasuk': ['', Validators.required],
+      'txtJudulSKripsi': ['', Validators.required],
+      'selKategori1': ['', Validators.required],
+      'selKategori2': ['', Validators.required],
+      'selKategori3': ['', Validators.required],
     });
   }
 
@@ -48,31 +51,36 @@ export class AddMhsPage {
       content: 'Loading...'
     });
     loading.present();
-    
+
     console.log(data, 'data mhs');
     this.authApi.doAddMhs({
       nim: data.txtNIM,
       nama: data.txtNama,
-      // email: data.txtEmail,
+      telphone: data.txtTelepon,
       ttl: data.txtTTL,
       pictures: '',
       jenisKelamin: data.selJK,
-      jenjang: data.selJenjang,
-      tanggalMasuk: data.selTglMasuk,
-      jurusan: 'Teknik Informatika'
+      tahunmasuk: data.txtTahunMasuk,
+      judulskripsi: data.txtJudulSKripsi,
+      kategori1: data.selKategori1,
+      kategori2: data.selKategori2,
+      kategori3: data.selKategori3
     }).subscribe(value => {
+      console.log(value, 'lalalaa');
       loading.dismiss().then(
         rest => {
-          this.events.publish('user:mhsadd');
-          this.alertCtrl.create({
-            message: 'Add Mahasiswa Successfully',
-            buttons: [{
-              text: 'OK',
-              handler: data => {
-                this.navCtrl.pop();
-              }
-            }]
-          }).present();
+          if (value.length != 0) {
+            this.events.publish('user:mhsadd');
+            this.alertCtrl.create({
+              message: 'Add Mahasiswa Successfully',
+              buttons: [{
+                text: 'OK',
+                handler: data => {
+                  this.navCtrl.pop();
+                }
+              }]
+            }).present();
+          }
         });
     });
   }

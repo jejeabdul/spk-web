@@ -1,4 +1,5 @@
-// import { EditDosenPage } from './edit-dosen/edit-dosen';
+import { TmPendidikanDosenApi } from './../../shared/sdk/services/custom/TmPendidikanDosen';
+import { EditDosenPage } from './edit-dosen/edit-dosen';
 import { TmDosenApi } from './../../shared/sdk/services/custom/TmDosen';
 import { AddDosenPage } from './add-dosen/add-dosen';
 import { Component } from '@angular/core';
@@ -17,17 +18,20 @@ import { NavController, NavParams, Events } from 'ionic-angular';
 })
 export class DosenPage {
   items: any;
+  itemPend: any;
   textSearchMember: any = '';
   start_member: number = 0;
   limit_member: number = 6;
   stop_member: boolean = false;
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public tmdosen: TmDosenApi,
-    public events: Events
-    ) {
-      this.getDataMhs('', '');
+    public events: Events,
+    public tmPendidikanDosenApi: TmPendidikanDosenApi
+  ) {
+    this.getDataMhs('', '');
+    this.getPedDSN();
     this.items = [];
     // add
     this.events.subscribe('user:mhsadd', (val) => {
@@ -37,7 +41,7 @@ export class DosenPage {
   }
 
   ionViewDidLoad() {
-    
+
   }
 
   AddDosen() {
@@ -49,11 +53,11 @@ export class DosenPage {
       this.tmdosen.find({
         where: {
           or: [
-            { nim: { like: '%' + val + '%' } },
+            { nidn: { like: '%' + val + '%' } },
             { nama: { like: '%' + val + '%' } }
           ]
 
-        }, order: "nama ASC",
+        }, order: "id DESC",
         limit: this.limit_member,
         skip: this.start_member
       }).subscribe(value => {
@@ -70,10 +74,11 @@ export class DosenPage {
       });
     } else {
       this.tmdosen.find({
-        order: "nama ASC",
+        order: "id DESC",
         limit: this.limit_member,
         skip: this.start_member
       }).subscribe(value => {
+        console.log(value);
         if (value.length !== 0) {
           for (let item of value) {
             this.items.push(item);
@@ -98,19 +103,19 @@ export class DosenPage {
     }
   }
 
-  // EditDosen(nidn) {
-  //   console.log(nidn);
-  //   this.navCtrl.push(EditDosenPage, { data: nidn });
-  // }
+  EditDosen(data) {
+    console.log(data);
+    this.navCtrl.push(EditDosenPage, { data: data });
+  }
 
-  delete(item){
+  delete(item) {
     console.log(item.id, 'data nidn');
     let idDosen = item.id;
     this.tmdosen.deleteById({
       where:
       { id: idDosen }
-    }).subscribe((data)=>{
-      console.log(data,'sukses');
+    }).subscribe((data) => {
+      console.log(data, 'sukses');
     })
   }
 
@@ -122,6 +127,13 @@ export class DosenPage {
       val.target.value = '';
     }
     this.getDataMhs('', val.target.value);
+  }
+
+  getPedDSN() {
+    this.tmPendidikanDosenApi.find().subscribe(data => {
+      console.log(data, 'ini pend');
+      this.itemPend = data;
+    });
   }
 
 }

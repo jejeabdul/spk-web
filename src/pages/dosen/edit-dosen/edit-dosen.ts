@@ -1,6 +1,5 @@
 import { TmDosenApi } from './../../../shared/sdk/services/custom/TmDosen';
 import { FormBuilder, Validators } from '@angular/forms';
-import { TmMahasiswaApi } from './../../../shared/sdk/services/custom/TmMahasiswa';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, LoadingController, Events } from 'ionic-angular';
 
@@ -27,11 +26,11 @@ export class EditDosenPage {
     public loadingCtrl: LoadingController,
     public events: Events
   ) {
-        this.myForm = fb.group({
+    this.myForm = fb.group({
       'txtNIDN': ['', Validators.required],
       'txtNama': ['', Validators.required],
       'txtTelepon': ['', Validators.required],
-      'jenjang': ['', Validators.required],
+      'txtPendidikan': ['', Validators.required],
       'txtTTL': ['', Validators.required],
       'jk': ['', Validators.required],
       'txtKuota': ['', Validators.required],
@@ -39,9 +38,10 @@ export class EditDosenPage {
       'alamat': ['', Validators.required],
       'txtFungsional': ['', Validators.required],
     });
-    
+
     this.getParamNidn = this.navParams.get('data');
-    this.doDataEdit(this.getParamNidn);
+    console.log(this.getParamNidn, 666);
+    this.doDataEdit(this.getParamNidn.nidn);
   }
 
   ionViewDidLoad() {
@@ -51,7 +51,7 @@ export class EditDosenPage {
   doDataEdit(nidn) {
     this.tmdosen.find({
       where: {
-        nimdn: nidn
+        nidn: nidn
       }
     }).subscribe(value => {
       console.log(value, 1111);
@@ -59,20 +59,27 @@ export class EditDosenPage {
     });
   }
 
-  doEditMhs(data) {
+  EditDosen(data) {
+    console.log(data, 222222222);
     let loading = this.loadingCtrl.create({
-      spinner: 'hide',
+      // spinner: 'hide',
       content: 'Loading...'
     });
     loading.present();
-    console.log(data, 222222222);
+
     this.tmdosen.updateAll({
-      nim: data.txtNIM
+      nidn: data.txtNIDN
     }, {
+        nidn: data.txtNIDN,
         nama: data.txtNama,
         ttl: data.txtTTL,
+        telephone: data.txtTelepon,
         jeniskelamin: data.jk,
-        jenjang: data.jenjang,
+        alamat: data.alamat,
+        idPendidikan: data.txtPendidikan,
+        idKompetensi: data.txtKompetensi,
+        idFungsional: data.txtFungsional,
+        idKuota: data.txtKuota
       }).subscribe(value => {
         loading.dismiss().then(
           rest => {

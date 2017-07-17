@@ -15,63 +15,82 @@
 
 <ion-content padding>
   <form [formGroup]="myForm" (ngSubmit)="EditDosen(myForm.value)">
-    <ion-list>
+    <ion-list *ngFor="let item of items">
       <ion-item>
         <ion-label color="primary" stacked>NIDN</ion-label>
-        <ion-input type="text" placeholder="NIDN Input" formControlName="txtNIDN"></ion-input>
+        <ion-input type="text" placeholder="NIDN Input" formControlName="txtNIDN" [(ngModel)]="item.nidn"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label color="primary" stacked>Nama</ion-label>
-        <ion-input type="text" placeholder="Nama Input" formControlName="txtNama"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label color="primary" stacked>No Telepon</ion-label>
-        <ion-input type="text" placeholder="No telepon Input" formControlName="txtTelepon"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label color="primary" stacked>Pendidikan</ion-label>
-        <ion-select [(ngModel)]="jenjang" placeholder="Pendidikan Select" formControlName="jenjang">
-          <ion-option value="D3">D3</ion-option>
-          <ion-option value="S1">S1</ion-option>
-          <ion-option value="S2">S2</ion-option>
-          <ion-option value="S3">S3</ion-option>
-        </ion-select>
+        <ion-input type="text" placeholder="Nama Input" formControlName="txtNama" [(ngModel)]="item.nama"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label color="primary" stacked>Tempat, Tanggal Lahir</ion-label>
-        <ion-input type="text" placeholder="TTL Input" formControlName="txtTTL"></ion-input>
+        <ion-input type="text" placeholder="TTL Input" formControlName="txtTTL" [(ngModel)]="item.ttl"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label color="primary" stacked>Jenis Kelamin</ion-label>
-        <ion-select [(ngModel)]="gender" placeholder="Jenis Kelamin Select" formControlName="jk">
+        <ion-select [(ngModel)]="item.jeniskelamin" placeholder="Jenis Kelamin Select" formControlName="jk">
           <ion-option value="L">Laki-laki</ion-option>
           <ion-option value="P">Perempuan</ion-option>
         </ion-select>
       </ion-item>
 
-       <ion-item>
-        <ion-label color="primary" stacked>Kuota</ion-label>
-        <ion-input type="text" placeholder="Kuota Input" formControlName="txtKuota"></ion-input>
-      </ion-item>
-
-       <ion-item>
-        <ion-label color="primary" stacked>Kompetensi</ion-label>
-        <ion-input type="text" placeholder="Kompetensi Input" formControlName="txtKompetensi"></ion-input>
+      <ion-item>
+        <ion-label color="primary" stacked>No Telepon</ion-label>
+        <ion-input type="text" placeholder="No telepon Input" formControlName="txtTelepon" [(ngModel)]="item.telephone"></ion-input>
       </ion-item>
 
       <ion-item>
-      <ion-label color="primary" stacked>Alamat</ion-label>
-      <ion-textarea placeholder="Alamat Input" formControlName="alamat"></ion-textarea>
-    </ion-item>
+        <ion-label color="primary" stacked>Alamat</ion-label>
+        <ion-textarea placeholder="Alamat Input" formControlName="alamat" [(ngModel)]="item.alamat"></ion-textarea>
+      </ion-item>
 
-       <ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Pendidikan</ion-label>
+        <ion-select [(ngModel)]="item.idPendidikan" placeholder="Pendidikan Select" formControlName="txtPendidikan">
+          <!--<ion-option value="D3">D3</ion-option>
+          <ion-option value="S1">S1</ion-option>-->
+          <ion-option value="1">S2</ion-option>
+          <ion-option value="2">S3</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
         <ion-label color="primary" stacked>Fungsional</ion-label>
-        <ion-input type="text" placeholder="Fungsional Input" formControlName="txtFungsional"></ion-input>
+        <ion-select [(ngModel)]="item.idFungsional" placeholder="Fungsional Select" formControlName="txtFungsional">
+          <ion-option value="1">Tenaga Pengajar</ion-option>
+          <ion-option value="2">Asisten Ahli</ion-option>
+          <ion-option value="3">Lektor</ion-option>
+          <ion-option value="4">Lektor Kepala</ion-option>
+          <ion-option value="5">Guru Besar</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" stacked>Kompetensi</ion-label>
+        <ion-select [(ngModel)]="item.idKompetensi" placeholder="Kompetensi Select" formControlName="txtKompetensi">
+          <ion-option value="1">Rekayasa Perangkat Lunak</ion-option>
+          <ion-option value="2">Sistem Pendukung Keputusan</ion-option>
+          <ion-option value="3">Sistem Informasi</ion-option>
+          <ion-option value="4">Jaringan</ion-option>
+          <ion-option value="5">Mobile</ion-option>
+          <ion-option value="6">Multimedia</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" stacked>Kuota</ion-label>
+        <ion-select [(ngModel)]="item.idKuota" placeholder="Kuota Select" formControlName="txtKuota">
+          <ion-option value="0">Min = 16, Max = 30</ion-option>
+          <ion-option value="0.25">Min = 12, Max = 16</ion-option>
+          <ion-option value="0.5">Min = 8, Max = 12</ion-option>
+          <ion-option value="0.75">Min = 4, Max = 8</ion-option>
+          <ion-option value="1">Min = 0, Max = 4</ion-option>
+        </ion-select>
       </ion-item>
 
     </ion-list>

@@ -2,23 +2,26 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the JurnalPage page.
+ * Generated class for the ChangepasswordPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
 @Component({
-  selector: 'page-jurnal',
-  templateUrl: 'jurnal.html',
+  selector: 'page-changepassword',
+  templateUrl: 'changepassword.html',
 })
-export class JurnalPage {
+export class ChangepasswordPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad JurnalPage');
+    console.log('ionViewDidLoad ChangepasswordPage');
+  }
+
+  submit(){
+    console.log("submit change password");
   }
 
 }

@@ -47,9 +47,7 @@ import { StorageBrowser } from './storage/storage.browser';
 import { AuthApi } from './services/custom/Auth';
 import { RolemappingApi } from './services/custom/Rolemapping';
 import { ContainerApi } from './services/custom/Container';
-import { TmMahasiswaApi } from './services/custom/TmMahasiswa';
 import { TmPegawaiApi } from './services/custom/TmPegawai';
-import { TmDosenApi } from './services/custom/TmDosen';
 import { TbUserApi } from './services/custom/TbUser';
 import { TbCalendarApi } from './services/custom/TbCalendar';
 import { TbChatroomApi } from './services/custom/TbChatroom';
@@ -57,6 +55,16 @@ import { TbChatusertoApi } from './services/custom/TbChatuserto';
 import { TbChatuserApi } from './services/custom/TbChatuser';
 import { TbChatroomlistApi } from './services/custom/TbChatroomlist';
 import { TbChatroomdetailApi } from './services/custom/TbChatroomdetail';
+import { TbDetailKomptensiDosenApi } from './services/custom/TbDetailKomptensiDosen';
+import { TmFungsionalDosenApi } from './services/custom/TmFungsionalDosen';
+import { TmKuotaApi } from './services/custom/TmKuota';
+import { TmKompetensiDosenApi } from './services/custom/TmKompetensiDosen';
+import { TmPendidikanDosenApi } from './services/custom/TmPendidikanDosen';
+import { TbKriteriaApi } from './services/custom/TbKriteria';
+import { TbHistoriKlasifikasiApi } from './services/custom/TbHistoriKlasifikasi';
+import { TmDosenApi } from './services/custom/TmDosen';
+import { TmMahasiswaApi } from './services/custom/TmMahasiswa';
+import { TmviewhistorykriteriaApi } from './services/custom/Tmviewhistorykriteria';
 /**
 * @module SDKBrowserModule
 * @description
@@ -89,9 +97,7 @@ export class SDKBrowserModule {
         AuthApi,
         RolemappingApi,
         ContainerApi,
-        TmMahasiswaApi,
         TmPegawaiApi,
-        TmDosenApi,
         TbUserApi,
         TbCalendarApi,
         TbChatroomApi,
@@ -99,6 +105,16 @@ export class SDKBrowserModule {
         TbChatuserApi,
         TbChatroomlistApi,
         TbChatroomdetailApi,
+        TbDetailKomptensiDosenApi,
+        TmFungsionalDosenApi,
+        TmKuotaApi,
+        TmKompetensiDosenApi,
+        TmPendidikanDosenApi,
+        TbKriteriaApi,
+        TbHistoriKlasifikasiApi,
+        TmDosenApi,
+        TmMahasiswaApi,
+        TmviewhistorykriteriaApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser }
       ]

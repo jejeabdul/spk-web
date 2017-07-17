@@ -2,12 +2,12 @@
 
 declare var Object: any;
 export interface TbUserInterface {
-  "username"?: string;
-  "password"?: string;
+  "username": string;
+  "password": string;
   "status"?: string;
   "createddate"?: Date;
   "realm"?: string;
-  "email": string;
+  "email"?: string;
   "id"?: number;
   "emailVerified"?: boolean;
   "verificationToken"?: string;

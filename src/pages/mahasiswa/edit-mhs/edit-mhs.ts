@@ -29,11 +29,14 @@ export class EditMhsPage {
     this.myForm = fb.group({
       'txtNIM': ['', Validators.required],
       'txtNama': ['', Validators.required],
-      // 'txtEmail': ['', Validators.compose([Validators.required, ValidationService.emailValidator])],
+      'txtTelepon': ['', Validators.required],
       'txtTTL': ['', Validators.required],
       'selJK': ['', Validators.required],
-      'selJenjang': ['', Validators.required],
-      'selTglMasuk': ['', Validators.required]
+      'txtTahunMasuk': ['', Validators.required],
+      'txtJudulSKripsi': ['', Validators.required],
+      'selKategori1': ['', Validators.required],
+      'selKategori2': ['', Validators.required],
+      'selKategori3': ['', Validators.required],
     });
 
     this.getParamNim = this.navParams.get('data');
@@ -60,16 +63,22 @@ export class EditMhsPage {
       spinner: 'hide',
       content: 'Loading...'
     });
+
     loading.present();
     console.log(data, 222222222);
     this.tmMahasiswaApi.updateAll({
       nim: data.txtNIM
     }, {
+        nim: data.txtNIM,
         nama: data.txtNama,
+        telphone: data.txtTelepon,
         ttl: data.txtTTL,
         jeniskelamin: data.selJK,
-        jenjang: data.selJenjang,
-        tanggalmasuk: data.selTglMasuk
+        jenjang: data.txtTahunMasuk,
+        tanggalmasuk: data.txtJudulSKripsi,
+        kategori1: data.selKategori1,
+        kategori2: data.selKategori2,
+        kategori3: data.selKategori3
       }).subscribe(value => {
         loading.dismiss().then(
           rest => {

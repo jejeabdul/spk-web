@@ -51,20 +51,19 @@ export class AddDosenPage {
       content: 'Loading...'
     });
     loading.present();
-    
-    console.log(data, 'data mhs');
+
     this.tmDosen.create({
-        nidn: data.txtNIDN,
-        alamat: data.alamat,
-        createddate: new Date(),
-        fungsional: data.txtFungsional,
-        jeniskelamin: data.jk,
-        kompetensi: data.txtKompetensi,
-        kuota: data.txtKuota,
-        nama: data.txtNama,
-        pendidikan: data.jenjang,
-        telephone: data.txtTelepon,
-        ttl: data.txtTTl
+      nidn: data.txtNIDN,
+      alamat: data.alamat,
+      createddate: new Date(),
+      idFungsional: data.txtFungsional,
+      jeniskelamin: data.jk,
+      idKompetensi: data.txtKompetensi,
+      idKuota: data.txtKuota,
+      nama: data.txtNama,
+      idPendidikan: data.jenjang,
+      telephone: data.txtTelepon,
+      ttl: data.txtTTL
     }).subscribe(value => {
       loading.dismiss().then(
         rest => {

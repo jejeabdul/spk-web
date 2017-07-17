@@ -1,0 +1,41 @@
+<!--
+  Generated template for the KlasifikasiPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>klasifikasi</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <button ion-button block (click)="doKlasifikasi()">PROSES KLASIFIKASI</button>
+
+  <ion-grid>
+    <ion-item-divider>
+      List Klasifikasi
+    </ion-item-divider>
+    <ion-item *ngFor="let item of items">
+      <ion-row>
+        <ion-col>
+          <ion-avatar item-left>
+            <img src="assets/img/{{item.pictures}}" onerror="this.src='assets/img/no-photo.gif'" />
+          </ion-avatar>
+          <p><b>NIM : </b>{{item.nim}}</p>
+          <p><b>Nama Mahasiswa : </b>{{item.nama}}</p>
+          <p><b>Judul Skripsi : </b>{{item.judulskripsi}}</p>
+          <p><b>Pembimbing 1 :</b>{{item.dosen[0]?.namadsn}} [ {{item.dosen[0]?.telephone}} ] {{item.dosen[0]?.bobot}}</p>
+          <p><b>Pembimbing 2 :</b>{{item.dosen[1]?.namadsn}} [ {{item.dosen[1]?.telephone}} ] {{item.dosen[1]?.bobot}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-grid>
+</ion-content>

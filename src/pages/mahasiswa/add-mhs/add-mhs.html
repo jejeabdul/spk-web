@@ -26,10 +26,10 @@
         <ion-input type="text" placeholder="Nama Input" formControlName="txtNama"></ion-input>
       </ion-item>
 
-      <!--<ion-item>
-        <ion-label color="primary" stacked>Email</ion-label>
-        <ion-input type="text" placeholder="Email Input" formControlName="txtEmail"></ion-input>
-      </ion-item>-->
+      <ion-item>
+        <ion-label color="primary" stacked>No Telephon</ion-label>
+        <ion-input type="tel" placeholder="No Telephone Input" formControlName="txtTelepon"></ion-input>
+      </ion-item>
 
       <ion-item>
         <ion-label color="primary" stacked>Tempat, Tanggal Lahir</ion-label>
@@ -44,24 +44,50 @@
         </ion-select>
       </ion-item>
 
-      <!--<ion-item>
-      <ion-label color="primary" stacked>Alamat</ion-label>
-      <ion-textarea placeholder="Alamat Input"></ion-textarea>
-    </ion-item>-->
-
       <ion-item>
-        <ion-label color="primary" stacked>Jenjang</ion-label>
-        <ion-select [(ngModel)]="jenjang" placeholder="Jenjang Select" formControlName="selJenjang">
-          <ion-option value="D3">D3</ion-option>
-          <ion-option value="S1">S1</ion-option>
-          <ion-option value="S2">S2</ion-option>
-          <ion-option value="S3">S3</ion-option>
-        </ion-select>
+        <ion-label color="primary" stacked>Tahun Masuk</ion-label>
+        <ion-input type="text" placeholder="Tahun Masuk Input" formControlName="txtTahunMasuk"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label color="primary" stacked>Tanggal Masuk</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate" placeholder="Tanggal Masuk Select" formControlName="selTglMasuk"></ion-datetime>
+        <ion-label color="primary" stacked>Judul Skripsi</ion-label>
+        <ion-input type="text" placeholder="Judul Skripsi Input" formControlName="txtJudulSKripsi"></ion-input>
+      </ion-item>
+
+       <ion-item>
+        <ion-label color="primary" stacked>Kategori 1</ion-label>
+        <ion-select [(ngModel)]="selKategori1" placeholder="Kategori Select" formControlName="selKategori1">
+          <ion-option value="1">Rekayasa Perangkat Lunak</ion-option>
+          <ion-option value="2">Sistem Pendukung Keputusan</ion-option>
+          <ion-option value="3">Sistem Informasi</ion-option>
+          <ion-option value="4">Jaringan</ion-option>
+          <ion-option value="5">Mobile</ion-option>
+          <ion-option value="6">Multimedia</ion-option>
+        </ion-select>
+      </ion-item>
+
+       <ion-item>
+        <ion-label color="primary" stacked>Kategori 2</ion-label>
+        <ion-select [(ngModel)]="selKategori2" placeholder="Kategori Select" formControlName="selKategori2">
+          <ion-option value="1">Rekayasa Perangkat Lunak</ion-option>
+          <ion-option value="2">Sistem Pendukung Keputusan</ion-option>
+          <ion-option value="3">Sistem Informasi</ion-option>
+          <ion-option value="4">Jaringan</ion-option>
+          <ion-option value="5">Mobile</ion-option>
+          <ion-option value="6">Multimedia</ion-option>
+        </ion-select>
+      </ion-item>
+
+       <ion-item>
+        <ion-label color="primary" stacked>Kategori 3</ion-label>
+        <ion-select [(ngModel)]="selKategori3" placeholder="Kategori Select" formControlName="selKategori3">
+          <ion-option value="1">Rekayasa Perangkat Lunak</ion-option>
+          <ion-option value="2">Sistem Pendukung Keputusan</ion-option>
+          <ion-option value="3">Sistem Informasi</ion-option>
+          <ion-option value="4">Jaringan</ion-option>
+          <ion-option value="5">Mobile</ion-option>
+          <ion-option value="6">Multimedia</ion-option>
+        </ion-select>
       </ion-item>
 
     </ion-list>
