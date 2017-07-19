@@ -35,16 +35,17 @@ export class MyProfilePage {
       }
     }).subscribe(item => {
       console.log(item, 11111111);
-
-      this.setPictures = 'http://localhost:3000/api/containers/' + item[0]['nim'] + '/download/' + item[0]['pictures'];
-      this.setNim = item[0]['nim'];
-      this.setNama = item[0]['nama'];
-      this.setTelephone = item[0]['telphone'];
+      if (item.length != 0) {
+        this.setPictures = 'http://localhost:3000/api/containers/' + item[0]['nim'] + '/download/' + item[0]['pictures'];
+        this.setNim = item[0]['nim'];
+        this.setNama = item[0]['nama'];
+        this.setTelephone = item[0]['telphone'];
+      }
     });
   }
 
   doUpdateMhs() {
-    console.log(this.setNim,this.setNama,this.setTelephone);
+    console.log(this.setNim, this.setNama, this.setTelephone);
     this.tmMahasiswaApi.updateAll({
       userid: 1
     }, {

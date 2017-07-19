@@ -4,10 +4,13 @@ declare var Object: any;
 export interface TmDosenInterface {
   "telephone"?: string;
   "ttl"?: string;
+  "pictures"?: string;
+  "created"?: Date;
   "jeniskelamin"?: string;
   "alamat"?: string;
   "id"?: number;
   "idFungsional": number;
+  "userid": number;
   "idKompetensi": number;
   "idKuota": number;
   "idPendidikan": number;
@@ -18,10 +21,13 @@ export interface TmDosenInterface {
 export class TmDosen implements TmDosenInterface {
   "telephone": string;
   "ttl": string;
+  "pictures": string;
+  "created": Date;
   "jeniskelamin": string;
   "alamat": string;
   "id": number;
   "idFungsional": number;
+  "userid": number;
   "idKompetensi": number;
   "idKuota": number;
   "idPendidikan": number;
@@ -66,6 +72,14 @@ export class TmDosen implements TmDosenInterface {
           name: 'ttl',
           type: 'string'
         },
+        "pictures": {
+          name: 'pictures',
+          type: 'string'
+        },
+        "created": {
+          name: 'created',
+          type: 'Date'
+        },
         "jeniskelamin": {
           name: 'jeniskelamin',
           type: 'string'
@@ -80,6 +94,10 @@ export class TmDosen implements TmDosenInterface {
         },
         "idFungsional": {
           name: 'idFungsional',
+          type: 'number'
+        },
+        "userid": {
+          name: 'userid',
           type: 'number'
         },
         "idKompetensi": {

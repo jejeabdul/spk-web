@@ -21,7 +21,7 @@ export class AddDosenPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public fb: FormBuilder,
-    public tmDosen: TmDosenApi,
+    public tmDosenApi: TmDosenApi,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public events: Events,
@@ -52,7 +52,7 @@ export class AddDosenPage {
     });
     loading.present();
 
-    this.tmDosen.create({
+    this.authApi.doAddDsn({
       nidn: data.txtNIDN,
       alamat: data.alamat,
       createddate: new Date(),
@@ -63,7 +63,8 @@ export class AddDosenPage {
       nama: data.txtNama,
       idPendidikan: data.jenjang,
       telephone: data.txtTelepon,
-      ttl: data.txtTTL
+      ttl: data.txtTTL,
+      pictures: ''
     }).subscribe(value => {
       loading.dismiss().then(
         rest => {

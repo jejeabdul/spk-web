@@ -2,10 +2,10 @@
   <br><br>
   <div text-center>
     <img src="assets/img/UMJ.png" width="120px" height="120px">
-    <h2 style="color:white">Fakultas Teknik Informatika</h2>
+    <h2 style="color:white">Fakultas Teknik Informatika</h2><br><br>
   </div>
 
-  <form [formGroup]="myForm" (ngSubmit)="goLogin(myForm.value)">
+  <form [formGroup]="myForm" (ngSubmit)="goLogin(myForm.value)" style="width: 450px;" item-center>
     <ion-item>
       <img src="assets/auth/name-member.png" item-left style="width:45px; height:45px;">
       <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>

@@ -53,11 +53,6 @@ export class MyApp {
         });
       });
     });
-
-    storage.ready().then(() => {
-
-    });
-
   }
 
   initializeApp() {
