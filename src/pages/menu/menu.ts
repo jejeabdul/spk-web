@@ -1,3 +1,4 @@
+import { LoopBackConfig } from './../../shared/sdk/lb.config';
 import { TmMahasiswaApi } from './../../shared/sdk/services/custom/TmMahasiswa';
 import { SignInPage } from './../sign-in/sign-in';
 import { KlasifikasiPage } from './../klasifikasi/klasifikasi';
@@ -11,7 +12,7 @@ import { HomePage } from './../home/home';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
+LoopBackConfig
 // page
 
 
@@ -32,6 +33,8 @@ export class MenuPage {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = HomePage;
   pages: Array<{ title: string, component: any, icons: any, show: boolean }>;
+  photo: any;
+  // LoopbackPath: 'http://localhost:3000/api/containers/'
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -78,10 +81,17 @@ export class MenuPage {
       this.tmMahasiswaApi.find({
         where: { userid: stuserid }
       }).subscribe(val => {
+        console.log(val, 'val')
         if (val) {
           this.setPictures = val[0]['pictures'];
           this.setNama = val[0]['nama'];
           this.setNim = val[0]['nim'];
+        }
+        if (this.setPictures == '') {
+          this.photo = 'assets/img/no-photo.gif';
+        } else {
+          const loopbackPath: string = LoopBackConfig.getPath();
+          this.photo = loopbackPath + '/api/containers/' + this.setNim + '/download/' + this.setPictures;
         }
       });
     });

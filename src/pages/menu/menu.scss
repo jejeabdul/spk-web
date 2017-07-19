@@ -1,12 +1,55 @@
 page-menu {
-.gradien-menu {
-  background: #000000; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, green , grey); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, green, grey); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, green, grey); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, green , grey); /* Standard syntax */
-}
+   #bg{
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position-y: 40%;
 
+        background: #000000; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(left, green , grey); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(right, green, grey); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(right, green, grey); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(to right, green , grey); /* Standard syntax */
+
+        margin-top: -24%;
+        height: 30%;
+    }
+
+    .foto-div{
+        width: 8em;
+        height: 8em;
+        border-radius: 50%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 0 auto;
+        background-position-y: 0;
+        margin-top: 5em;
+        border: 3px solid #FFF; 
+    }
+
+    .gradien-menu {
+      background: #000000; /* For browsers that do not support gradients */
+      background: -webkit-linear-gradient(left, green , grey); /* For Safari 5.1 to 6.0 */
+      background: -o-linear-gradient(right, green, grey); /* For Opera 11.1 to 12.0 */
+      background: -moz-linear-gradient(right, green, grey); /* For Firefox 3.6 to 15 */
+      background: linear-gradient(to right, green , grey); /* Standard syntax */
+    }
+
+    .img-profile{
+      border-radius:50%;width: 5em; height: 5em;margin-left:15px;
+    }
+
+    .text-fullname{
+      font-size:1.5em;
+      color:white;
+      // margin-bottom:10px;
+      margin-left:15px;
+    }
+
+    .title-menu{
+        color: white;
+        text-align: center;
+    }
     
 
 }
