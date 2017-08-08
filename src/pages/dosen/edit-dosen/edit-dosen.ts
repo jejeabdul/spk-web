@@ -33,7 +33,7 @@ export class EditDosenPage {
       'txtPendidikan': ['', Validators.required],
       'txtTTL': ['', Validators.required],
       'jk': ['', Validators.required],
-      'txtKuota': ['', Validators.required],
+      // 'txtKuota': ['', Validators.required],
       'txtKompetensi': ['', Validators.required],
       'alamat': ['', Validators.required],
       'txtFungsional': ['', Validators.required],
@@ -79,7 +79,7 @@ export class EditDosenPage {
         idPendidikan: data.txtPendidikan,
         idKompetensi: data.txtKompetensi,
         idFungsional: data.txtFungsional,
-        idKuota: data.txtKuota
+        idKuota: ''
       }).subscribe(value => {
         loading.dismiss().then(
           rest => {

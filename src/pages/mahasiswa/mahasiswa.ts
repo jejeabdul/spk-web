@@ -18,7 +18,7 @@ export class MahasiswaPage {
   items: any;
   textSearchMember: any = '';
   start_member: number = 0;
-  limit_member: number = 6;
+  limit_member: number = 10;
   stop_member: boolean = false;
   constructor(
     public navCtrl: NavController,

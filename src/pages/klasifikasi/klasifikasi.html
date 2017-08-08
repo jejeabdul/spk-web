@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>klasifikasi</ion-title>
+    <ion-title>Klasifikasi</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,8 +18,11 @@
 
 <ion-content padding>
   <button ion-button block (click)="doKlasifikasi()">PROSES KLASIFIKASI</button>
-
-  <ion-grid>
+   <button (click)="loadMhsBayes001()">proses bayes1</button> 
+   <button (click)="loadMhsBayes002()">proses bayes2</button> 
+   <button (click)="loadMhsBayes003()">proses bayes3</button> 
+   <button (click)="loadMhsBayes004()">proses bayes4</button> 
+    <ion-grid>
     <ion-item-divider>
       List Klasifikasi
     </ion-item-divider>
@@ -32,10 +35,45 @@
           <p><b>NIM : </b>{{item.nim}}</p>
           <p><b>Nama Mahasiswa : </b>{{item.nama}}</p>
           <p><b>Judul Skripsi : </b>{{item.judulskripsi}}</p>
-          <p><b>Pembimbing 1 :</b>{{item.dosen[0]?.namadsn}} [ {{item.dosen[0]?.telephone}} ] {{item.dosen[0]?.bobot}}</p>
-          <p><b>Pembimbing 2 :</b>{{item.dosen[1]?.namadsn}} [ {{item.dosen[1]?.telephone}} ] {{item.dosen[1]?.bobot}}</p>
+          <p><b>Pembimbing 1 :</b>{{item.dosen[0]?.namadsn}} [ {{item.dosen[0]?.telephone}} ] <!--{{item.dosen[0]?.bobot}}--></p>
+          <p><b>Pembimbing 2 :</b>{{item.dosen[1]?.namadsn}} [ {{item.dosen[1]?.telephone}} ] <!--{{item.dosen[1]?.bobot}}--></p>
         </ion-col>
       </ion-row>
     </ion-item>
-  </ion-grid>
+  </ion-grid>  
+  <!-- <ion-grid>
+  <ion-item-divider>
+    List Klasifikasi
+  </ion-item-divider>
+  <ion-item>
+    <table border="1" width="100%" style="padding:2px">
+      <tr style="text-align:center;height: 50px;background-color: lightgreen;">
+        <td rowspan="2"></td>
+        <td rowspan="2">NIM</td>
+        <td rowspan="2">Nama</td>
+        <td rowspan="2">Judul Skripsi</td>
+        <td colspan="2">Pembimbing</td>
+        <td rowspan="2">Aksi</td>
+      </tr>
+      <tr>
+        <td>Pembimbing I</td>
+        <td>Pembimbing II</td>
+      </tr>
+      <tr *ngFor="let item of items" style="text-align:center">
+        <td>
+          <ion-avatar item-left>
+            <img src="assets/img/{{item.pictures}}" onerror="this.src='assets/img/no-photo.gif'" />
+          </ion-avatar>
+        </td>
+        <td>{{item.nim}}</td>
+        <td>{{item.nama}}</td>
+        <td style="width:40px;
+    font-size:12px;word-break:break-all">{{item.judulskripsi}}</td>
+        <td>{{item.dosen[0]?.namadsn}} [ {{item.dosen[0]?.telephone}} ] {{item.dosen[0]?.bobot}}</td>
+        <td>{{item.dosen[1]?.namadsn}} [ {{item.dosen[1]?.telephone}} ] {{item.dosen[0]?.bobot}}</td>
+      </tr>
+
+    </table>
+  </ion-item>
+  </ion-grid> -->
 </ion-content>

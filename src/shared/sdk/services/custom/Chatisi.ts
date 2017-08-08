@@ -10,15 +10,15 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { TmPendidikanDosen } from '../../models/TmPendidikanDosen';
+import { Chatisi } from '../../models/Chatisi';
 import { SocketConnection } from '../../sockets/socket.connections';
 
 
 /**
- * Api services for the `TmPendidikanDosen` model.
+ * Api services for the `Chatisi` model.
  */
 @Injectable()
-export class TmPendidikanDosenApi extends BaseLoopBackApi {
+export class ChatisiApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -44,13 +44,13 @@ export class TmPendidikanDosenApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `TmPendidikanDosen` object.)
+   * This usually means the response is a `Chatisi` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/TmPendidikanDosens";
+    "/Chatisis";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -63,7 +63,7 @@ export class TmPendidikanDosenApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id TmPendidikanDosen id
+   * @param {any} id Chatisi id
    *
    * @param {object} data Request data.
    *
@@ -75,13 +75,13 @@ export class TmPendidikanDosenApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `TmPendidikanDosen` object.)
+   * This usually means the response is a `Chatisi` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/TmPendidikanDosens/:id";
+    "/Chatisis/:id";
     let _routeParams: any = {
       id: id
     };
@@ -95,9 +95,9 @@ export class TmPendidikanDosenApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `TmPendidikanDosen`.
+   * i.e. `Chatisi`.
    */
   public getModelName() {
-    return "TmPendidikanDosen";
+    return "Chatisi";
   }
 }

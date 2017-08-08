@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-title *ngIf="flag != 1">Add Event</ion-title>
+  <ion-navbar color="secondary">
+    <ion-title *ngIf="flag != 1">Tambah Event</ion-title>
     <ion-title *ngIf="flag == 1">Detail Event</ion-title>
     <ion-buttons end>
       <button ion-button (click)="submit()" [hidden]="isDetailLocal" [disabled]="!eventData.title">
-        Done
+        Selesai
       </button>
     </ion-buttons>
   </ion-navbar>

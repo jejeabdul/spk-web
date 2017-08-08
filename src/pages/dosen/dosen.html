@@ -1,9 +1,3 @@
-<!--
-  Generated template for the MahasiswaPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="secondary">
@@ -19,44 +13,42 @@
 
 
 <ion-content padding>
-  <ion-grid>
-    <ion-item-divider>
-      List Dosen Pembimbing
-    </ion-item-divider>
-    <ion-item>
-      <ion-row>
-        <ion-col>
-        </ion-col>
-        <ion-col>
-          <b>NIDN</b>
-        </ion-col>
-        <ion-col>
-          <b>Nama</b>
-        </ion-col>
-        <ion-col>
-          <b>Action</b>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-    <ion-item *ngFor="let item of items">
-      <ion-row>
-        <ion-col>
+  <ion-item-divider>
+    Daftar Dosen Pembimbing<br>
+    <p>Total : {{itemTot}}</p>
+  </ion-item-divider>
+  <ion-item>
+    <table border="1" width="100%" style="padding:2px">
+      <tr style="text-align:center;height: 50px;background-color: lightgreen;">
+        <td></td>
+        <td>NIM</td>
+        <td>Nama</td>
+        <td>Telephone</td>
+        <td>Aksi</td>
+      </tr>
+      <tr *ngFor="let item of items" style="text-align:center">
+        <td style="align:center;">
           <ion-avatar item-left>
             <img src="assets/img/{{item.pictures}}" onerror="this.src='assets/img/no-photo.gif'" />
           </ion-avatar>
-        </ion-col>
-        <ion-col>
+        </td>
+        <td>
           <p>{{item.nidn}}</p>
-        </ion-col>
-        <ion-col>
+        </td>
+        <td>
           <P>{{item.nama}}</P>
-        </ion-col>
-        <ion-col>
+        </td>
+        <td>
+          <P>{{item.telephone}}</P>
+        </td>
+        <td>
           <button ion-button outline item-end (click)="EditDosen(item)"><ion-icon name="create"></ion-icon></button>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-grid>
+        </td>
+      </tr>
+    </table>
+  </ion-item>
+  <!-- </ion-content> -->
+  <!--  -->
   <ion-fab bottom right>
     <button ion-fab mini (click)="AddDosen();"><ion-icon name="add"></ion-icon></button>
   </ion-fab>

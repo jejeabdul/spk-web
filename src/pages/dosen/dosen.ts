@@ -19,9 +19,10 @@ import { NavController, NavParams, Events } from 'ionic-angular';
 export class DosenPage {
   items: any;
   itemPend: any;
+  itemTot: any = 0;
   textSearchMember: any = '';
   start_member: number = 0;
-  limit_member: number = 6;
+  limit_member: number = 10;
   stop_member: boolean = false;
   constructor(
     public navCtrl: NavController,
@@ -37,6 +38,10 @@ export class DosenPage {
     this.events.subscribe('user:mhsadd', (val) => {
       this.getDataMhs('', '');
       this.items = [];
+    });
+
+    this.tmdosen.find().subscribe(req => {
+      this.itemTot = req.length;
     });
   }
 
@@ -57,7 +62,7 @@ export class DosenPage {
             { nama: { like: '%' + val + '%' } }
           ]
 
-        }, order: "id DESC",
+        }, order: "nama ASC",
         limit: this.limit_member,
         skip: this.start_member
       }).subscribe(value => {
@@ -74,11 +79,10 @@ export class DosenPage {
       });
     } else {
       this.tmdosen.find({
-        order: "id DESC",
+        order: "nama ASC",
         limit: this.limit_member,
         skip: this.start_member
       }).subscribe(value => {
-        console.log(value);
         if (value.length !== 0) {
           for (let item of value) {
             this.items.push(item);

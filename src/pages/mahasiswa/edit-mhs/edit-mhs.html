@@ -56,40 +56,34 @@
       <ion-item>
         <ion-label color="primary" stacked>Kategori 1</ion-label>
         <ion-select [(ngModel)]="item.kategori1" placeholder="Kategori Select" formControlName="selKategori1">
-          <ion-option value="1">Rekayasa Perangkat Lunak</ion-option>
-          <ion-option value="2">Sistem Pendukung Keputusan</ion-option>
-          <ion-option value="3">Sistem Informasi</ion-option>
-          <ion-option value="4">Jaringan</ion-option>
-          <ion-option value="5">Mobile</ion-option>
-          <ion-option value="6">Multimedia</ion-option>
+          <div *ngFor="let item of itemsK">
+            <ion-option value="{{item.value}}" *ngIf="item.value != item.kategori2 && item.value != item.kategori3">{{item.name}}&nbsp;[
+              <p style="color:red;">{{item.detail}}</p>]</ion-option>
+          </div>
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label color="primary" stacked>Kategori 2</ion-label>
         <ion-select [(ngModel)]="item.kategori2" placeholder="Kategori Select" formControlName="selKategori2">
-          <ion-option value="1">Rekayasa Perangkat Lunak</ion-option>
-          <ion-option value="2">Sistem Pendukung Keputusan</ion-option>
-          <ion-option value="3">Sistem Informasi</ion-option>
-          <ion-option value="4">Jaringan</ion-option>
-          <ion-option value="5">Mobile</ion-option>
-          <ion-option value="6">Multimedia</ion-option>
+          <div *ngFor="let item of itemsK">
+            <ion-option value="{{item.value}}" *ngIf="item.value != item.kategori1 && item.value != item.kategori3">{{item.name}}&nbsp;[
+              <p style="color:red;">{{item.detail}}</p>]</ion-option>
+          </div>
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label color="primary" stacked>Kategori 3</ion-label>
         <ion-select [(ngModel)]="item.kategori3" placeholder="Kategori Select" formControlName="selKategori3">
-          <ion-option value="1">Rekayasa Perangkat Lunak</ion-option>
-          <ion-option value="2">Sistem Pendukung Keputusan</ion-option>
-          <ion-option value="3">Sistem Informasi</ion-option>
-          <ion-option value="4">Jaringan</ion-option>
-          <ion-option value="5">Mobile</ion-option>
-          <ion-option value="6">Multimedia</ion-option>
+          <div *ngFor="let item of itemsK">
+            <ion-option value="{{item.value}}" *ngIf="item.value != item.kategori2 && item.value != item.kategori1">{{item.name}}&nbsp;[
+              <p style="color:red;">{{item.detail}}</p>]</ion-option>
+          </div>
         </ion-select>
       </ion-item>
 
     </ion-list>
-    <button ion-button round [disabled]="!myForm.valid">Update</button>
+    <button ion-button round [disabled]="!myForm.valid">Ubah</button>
   </form>
 </ion-content>

@@ -18,7 +18,7 @@
     <ion-list>
       <ion-item>
         <ion-label color="primary" stacked>NIDN</ion-label>
-        <ion-input type="text" placeholder="NIM Input" formControlName="txtNIDN"></ion-input>
+        <ion-input type="text" placeholder="NIDN Input" formControlName="txtNIDN"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -74,15 +74,12 @@
         <ion-label color="primary" stacked>Kompetensi</ion-label>
         <ion-select [(ngModel)]="txtKompetensi" placeholder="Kompetensi Select" formControlName="txtKompetensi">
           <ion-option value="1">Rekayasa Perangkat Lunak</ion-option>
-          <ion-option value="2">Sistem Pendukung Keputusan</ion-option>
-          <ion-option value="3">Sistem Informasi</ion-option>
-          <ion-option value="4">Jaringan</ion-option>
-          <ion-option value="5">Mobile</ion-option>
-          <ion-option value="6">Multimedia</ion-option>
+          <ion-option value="2">Jaringan</ion-option>
+          <ion-option value="3">AI(Artificial Intelligence)</ion-option>
         </ion-select>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-label color="primary" stacked>Kuota</ion-label>
         <ion-select [(ngModel)]="txtKuota" placeholder="Kuota Select" formControlName="txtKuota">
           <ion-option value="0">Min = 16, Max = 30</ion-option>
@@ -91,7 +88,7 @@
           <ion-option value="0.75">Min = 4, Max = 8</ion-option>
           <ion-option value="1">Min = 0, Max = 4</ion-option>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
 
     </ion-list>
     <button ion-button round [disabled]="!myForm.valid">Simpan</button>

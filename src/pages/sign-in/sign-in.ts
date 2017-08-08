@@ -3,7 +3,7 @@ import { LoopBackAuth } from './../../shared/sdk/services/core/auth.service';
 import { MenuPage } from './../menu/menu';
 import { AuthApi } from './../../shared/sdk/services/custom/Auth';
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 /**
@@ -28,6 +28,7 @@ export class SignInPage {
     public authApi: AuthApi,
     public storage: Storage,
     public auth: LoopBackAuth,
+    public alertCtrl: AlertController,
     public rolemappingApi: RolemappingApi
 
   ) {
@@ -45,7 +46,6 @@ export class SignInPage {
       });
     });
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInPage');
   }
@@ -53,13 +53,11 @@ export class SignInPage {
   onKey(value: string) {
     this.values = value;
   }
-
   passView(data) {
     if (data == 'showpass') {
       this.showpass = !this.showpass;
     }
   }
-
   // action login 
   goLogin(val) {
     console.log(val, 111)
@@ -67,12 +65,24 @@ export class SignInPage {
       username: val.username,
       password: val.password
     }).subscribe(value => {
-      console.log(value, 777, value.result.id)
-      this.storage.set('roleid', value.req[0]['roleId']);
-      this.storage.set('sessionId', value.result.id);
-      this.storage.set('stuserid', value.val[0].id);
-      this.auth.setToken(value.result);
-      this.navCtrl.setRoot(MenuPage);
+      console.log(value,99)
+      if (value.length) {
+        this.storage.set('roleid', value[0].req[0]['roleId']);
+        this.storage.set('sessionId', value[0].result.id);
+        this.storage.set('stuserid', value[0].val[0].id);
+        this.auth.setToken(value[0].result);
+        this.navCtrl.setRoot(MenuPage);
+      } else {
+        this.alertCtrl.create({
+          message: 'Invalid Username or Password!',
+          buttons: [{
+            text: 'OK',
+            handler: data => {
+              
+            }
+          }]
+        }).present();
+      }
     });
   }
 }

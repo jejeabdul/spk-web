@@ -60,12 +60,12 @@ export class MenuPage {
     //   value => {
 
     this.pages = [
-      { title: 'Home', component: HomePage, icons: 'home', show: true },
+      { title: 'Beranda', component: HomePage, icons: 'home', show: true },
       { title: 'Dosen Pembimbing', component: DosenPage, icons: 'people', show: true },
       { title: 'Mahasiswa', component: MahasiswaPage, icons: 'contacts', show: true },
       { title: 'Klasifikasi', component: KlasifikasiPage, icons: 'contact', show: true },
-      { title: 'My Calendar', component: MyCalendarPage, icons: 'calendar', show: true },
-      { title: 'Chat', component: ChatPage, icons: 'chatbubbles', show: true },
+      { title: 'Kalender', component: MyCalendarPage, icons: 'calendar', show: true },
+      // { title: 'Percakapan', component: ChatPage, icons: 'chatbubbles', show: true },
       { title: 'Pengaturan', component: SettingsPage, icons: 'settings', show: true }
     ];
     // });
@@ -82,7 +82,7 @@ export class MenuPage {
         where: { userid: stuserid }
       }).subscribe(val => {
         console.log(val, 'val')
-        if (val) {
+        if (val.length != 0) {
           this.setPictures = val[0]['pictures'];
           this.setNama = val[0]['nama'];
           this.setNim = val[0]['nim'];
@@ -91,7 +91,7 @@ export class MenuPage {
           this.photo = 'assets/img/no-photo.gif';
         } else {
           const loopbackPath: string = LoopBackConfig.getPath();
-          this.photo = loopbackPath + '/api/containers/' + this.setNim + '/download/' + this.setPictures;
+          this.photo = loopbackPath + '/api/containers/' + stuserid + '/download/' + this.setPictures;
         }
       });
     });

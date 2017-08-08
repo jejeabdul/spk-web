@@ -44,6 +44,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
+import { SocketBrowser } from './sockets/socket.browser';
+import { SocketDriver } from './sockets/socket.driver';
+import { SocketConnection } from './sockets/socket.connections';
+import { RealTime } from './services/core/real.time';
 import { AuthApi } from './services/custom/Auth';
 import { RolemappingApi } from './services/custom/Rolemapping';
 import { ContainerApi } from './services/custom/Container';
@@ -65,6 +69,8 @@ import { TbHistoriKlasifikasiApi } from './services/custom/TbHistoriKlasifikasi'
 import { TmDosenApi } from './services/custom/TmDosen';
 import { TmMahasiswaApi } from './services/custom/TmMahasiswa';
 import { TmviewhistorykriteriaApi } from './services/custom/Tmviewhistorykriteria';
+import { ChatroomApi } from './services/custom/Chatroom';
+import { ChatisiApi } from './services/custom/Chatisi';
 /**
 * @module SDKBrowserModule
 * @description
@@ -79,7 +85,8 @@ import { TmviewhistorykriteriaApi } from './services/custom/Tmviewhistorykriteri
   declarations: [ ],
   exports:      [ ],
   providers:    [
-    ErrorHandler
+    ErrorHandler,
+    SocketConnection
   ]
 })
 export class SDKBrowserModule {
@@ -94,6 +101,7 @@ export class SDKBrowserModule {
         LoggerService,
         JSONSearchParams,
         SDKModels,
+        RealTime,
         AuthApi,
         RolemappingApi,
         ContainerApi,
@@ -115,8 +123,11 @@ export class SDKBrowserModule {
         TmDosenApi,
         TmMahasiswaApi,
         TmviewhistorykriteriaApi,
+        ChatroomApi,
+        ChatisiApi,
         internalStorageProvider,
-        { provide: SDKStorage, useClass: StorageBrowser }
+        { provide: SDKStorage, useClass: StorageBrowser },
+        { provide: SocketDriver, useClass: SocketBrowser }
       ]
     };
   }

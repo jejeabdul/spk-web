@@ -1,5 +1,8 @@
+import { TbChatroomlistApi } from './../../shared/sdk/services/custom/TbChatroomlist';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
 
 /**
  * Generated class for the ChatPage page.
@@ -14,7 +17,12 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class ChatPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public storage: Storage,
+    public tbChatroomlistApi: TbChatroomlistApi
+  ) {
   }
 
   ionViewDidLoad() {

@@ -45,6 +45,9 @@ export class SettingsPage {
   goLogout() {
     // this.storage.get('sessionId').then((sessionId) => {
     //   this.tbUserApi.logout().subscribe(res => {
+    this.storage.remove('roleid');
+    this.storage.remove('sessionId');
+    this.storage.remove('stuserid');
     this.storage.clear();
     window.localStorage.clear();
     this.events.publish('user:logout');

@@ -10,7 +10,7 @@ export interface TmDosenInterface {
   "alamat"?: string;
   "id"?: number;
   "idFungsional": number;
-  "userid": number;
+  "userid"?: number;
   "idKompetensi": number;
   "idKuota": number;
   "idPendidikan": number;

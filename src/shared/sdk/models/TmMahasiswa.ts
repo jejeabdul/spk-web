@@ -2,19 +2,22 @@
 
 declare var Object: any;
 export interface TmMahasiswaInterface {
-  "userid": number;
+  "userid"?: number;
   "nim": string;
   "nama": string;
-  "judulskripsi": string;
+  "judulskripsi"?: string;
   "pictures"?: string;
   "kategori1": number;
   "kategori2": number;
   "kategori3": number;
+  "periode": number;
   "id"?: number;
   "jeniskelamin"?: string;
   "tahunmasuk"?: string;
   "telphone"?: string;
   "ttl"?: string;
+  "kelas"?: string;
+  "proses"?: string;
 }
 
 export class TmMahasiswa implements TmMahasiswaInterface {
@@ -26,11 +29,14 @@ export class TmMahasiswa implements TmMahasiswaInterface {
   "kategori1": number;
   "kategori2": number;
   "kategori3": number;
+  "periode": number;
   "id": number;
   "jeniskelamin": string;
   "tahunmasuk": string;
   "telphone": string;
   "ttl": string;
+  "kelas": string;
+  "proses": string;
   constructor(data?: TmMahasiswaInterface) {
     Object.assign(this, data);
   }
@@ -94,6 +100,10 @@ export class TmMahasiswa implements TmMahasiswaInterface {
           name: 'kategori3',
           type: 'number'
         },
+        "periode": {
+          name: 'periode',
+          type: 'number'
+        },
         "id": {
           name: 'id',
           type: 'number'
@@ -112,6 +122,14 @@ export class TmMahasiswa implements TmMahasiswaInterface {
         },
         "ttl": {
           name: 'ttl',
+          type: 'string'
+        },
+        "kelas": {
+          name: 'kelas',
+          type: 'string'
+        },
+        "proses": {
+          name: 'proses',
           type: 'string'
         },
       },

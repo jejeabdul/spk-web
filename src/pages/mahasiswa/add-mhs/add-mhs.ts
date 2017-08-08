@@ -2,7 +2,7 @@ import { AuthApi } from './../../../shared/sdk/services/custom/Auth';
 import { TmMahasiswaApi } from './../../../shared/sdk/services/custom/TmMahasiswa';
 // import { ValidationService } from './../../../components/validation.service';
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, Events } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, Events, ViewController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
 /**
@@ -17,6 +17,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AddMhsPage {
   public myForm: any = null;
+  items: any = [];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -25,7 +26,8 @@ export class AddMhsPage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public events: Events,
-    public authApi: AuthApi
+    public authApi: AuthApi,
+    public viewCtrl: ViewController,
   ) {
     this.myForm = fb.group({
       'txtNIM': ['', Validators.required],
@@ -39,6 +41,12 @@ export class AddMhsPage {
       'selKategori2': ['', Validators.required],
       'selKategori3': ['', Validators.required],
     });
+
+    this.items = [
+      { value: 1, name: 'Rekayasa Perangkat Lunak', detail: 'Web, Mobile, AR, Multimedia' },
+      { value: 2, name: 'Jaringan', detail: 'Arsitektur Jaringan, Robotika, Mobile, Cloud, Mikrokontroller' },
+      { value: 3, name: 'AI(Artificial Intelligence', detail: 'SPK, Multimedia, Robotika, Game' }
+    ];
   }
 
   ionViewDidLoad() {
@@ -76,7 +84,7 @@ export class AddMhsPage {
               buttons: [{
                 text: 'OK',
                 handler: data => {
-                  this.navCtrl.pop();
+                  this.viewCtrl.dismiss();
                 }
               }]
             }).present();

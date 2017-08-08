@@ -20,5 +20,7 @@ export * from './TbHistoriKlasifikasi';
 export * from './TmDosen';
 export * from './TmMahasiswa';
 export * from './Tmviewhistorykriteria';
+export * from './Chatroom';
+export * from './Chatisi';
 export * from './SDKModels';
 export * from './logger.service';

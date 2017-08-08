@@ -14,6 +14,7 @@ export interface TmviewhistorykriteriaInterface {
   "idKuota"?: number;
   "telephone"?: string;
   "nim": string;
+  "periode": number;
   "namamhs": string;
   "kategori1": number;
   "kategori2": number;
@@ -35,6 +36,7 @@ export class Tmviewhistorykriteria implements TmviewhistorykriteriaInterface {
   "idKuota": number;
   "telephone": string;
   "nim": string;
+  "periode": number;
   "namamhs": string;
   "kategori1": number;
   "kategori2": number;
@@ -119,6 +121,10 @@ export class Tmviewhistorykriteria implements TmviewhistorykriteriaInterface {
         "nim": {
           name: 'nim',
           type: 'string'
+        },
+        "periode": {
+          name: 'periode',
+          type: 'number'
         },
         "namamhs": {
           name: 'namamhs',

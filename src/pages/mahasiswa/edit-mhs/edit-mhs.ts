@@ -16,6 +16,7 @@ import { NavController, NavParams, AlertController, LoadingController, Events } 
 export class EditMhsPage {
   getParamNim: any;
   items: any;
+  itemsK: any = [];
   public myForm: any = null;
   constructor(
     public navCtrl: NavController,
@@ -26,6 +27,13 @@ export class EditMhsPage {
     public loadingCtrl: LoadingController,
     public events: Events
   ) {
+
+    this.itemsK = [
+       { value: 1, name: 'Rekayasa Perangkat Lunak', detail: 'Web, Mobile, AR, Multimedia' },
+      { value: 2, name: 'Jaringan', detail: 'Arsitektur Jaringan, Robotika, Mobile, Cloud, Mikrokontroller' },
+      { value: 3, name: 'AI(Artificial Intelligence', detail: 'SPK, Multimedia, Robotika, Game' }
+    ];
+
     this.myForm = fb.group({
       'txtNIM': ['', Validators.required],
       'txtNama': ['', Validators.required],

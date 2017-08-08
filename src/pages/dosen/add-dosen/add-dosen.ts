@@ -2,7 +2,7 @@ import { TmDosenApi } from './../../../shared/sdk/services/custom/TmDosen';
 import { AuthApi } from './../../../shared/sdk/services/custom/Auth';
 // import { ValidationService } from './../../../components/validation.service';
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, Events } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, Events, ViewController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
 /**
@@ -25,7 +25,8 @@ export class AddDosenPage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public events: Events,
-    public authApi: AuthApi
+    public authApi: AuthApi,
+    public viewCtrl: ViewController,
   ) {
     this.myForm = fb.group({
       'txtNIDN': ['', Validators.required],
@@ -34,7 +35,7 @@ export class AddDosenPage {
       'jenjang': ['', Validators.required],
       'txtTTL': ['', Validators.required],
       'jk': ['', Validators.required],
-      'txtKuota': ['', Validators.required],
+      // 'txtKuota': ['', Validators.required],
       'txtKompetensi': ['', Validators.required],
       'alamat': ['', Validators.required],
       'txtFungsional': ['', Validators.required],
@@ -59,7 +60,7 @@ export class AddDosenPage {
       idFungsional: data.txtFungsional,
       jeniskelamin: data.jk,
       idKompetensi: data.txtKompetensi,
-      idKuota: data.txtKuota,
+      idKuota: '',
       nama: data.txtNama,
       idPendidikan: data.jenjang,
       telephone: data.txtTelepon,
@@ -74,7 +75,7 @@ export class AddDosenPage {
             buttons: [{
               text: 'OK',
               handler: data => {
-                this.navCtrl.pop();
+                this.viewCtrl.dismiss();
               }
             }]
           }).present();

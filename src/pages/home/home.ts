@@ -22,7 +22,4 @@ export class HomePage {
       this.jmlDsn = val.length;
     });
   }
-
-
-
 }

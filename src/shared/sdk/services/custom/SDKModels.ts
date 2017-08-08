@@ -21,6 +21,8 @@ import { TbHistoriKlasifikasi } from '../../models/TbHistoriKlasifikasi';
 import { TmDosen } from '../../models/TmDosen';
 import { TmMahasiswa } from '../../models/TmMahasiswa';
 import { Tmviewhistorykriteria } from '../../models/Tmviewhistorykriteria';
+import { Chatroom } from '../../models/Chatroom';
+import { Chatisi } from '../../models/Chatisi';
 
 export interface Models { [name: string]: any }
 
@@ -49,6 +51,8 @@ export class SDKModels {
     TmDosen: TmDosen,
     TmMahasiswa: TmMahasiswa,
     Tmviewhistorykriteria: Tmviewhistorykriteria,
+    Chatroom: Chatroom,
+    Chatisi: Chatisi,
     
   };
 
