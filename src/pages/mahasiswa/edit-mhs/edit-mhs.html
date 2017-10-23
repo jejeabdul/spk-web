@@ -28,10 +28,10 @@
 
       <ion-item>
         <ion-label color="primary" stacked>No Telephon</ion-label>
-        <ion-input type="tel" placeholder="No Telephone Input" formControlName="txtTelepon"></ion-input>
+        <ion-input type="tel" placeholder="No Telephone Input" formControlName="txtTelepon" [(ngModel)]="item.telphone"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-label color="primary" stacked>Tempat, Tanggal Lahir</ion-label>
         <ion-input type="text" placeholder="TTL Input" formControlName="txtTTL" [(ngModel)]="item.ttl"></ion-input>
       </ion-item>
@@ -42,47 +42,71 @@
           <ion-option value="L">Laki-laki</ion-option>
           <ion-option value="P">Perempuan</ion-option>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
       <ion-item>
-        <ion-label color="primary" stacked>Tahun Masuk</ion-label>
-        <ion-input type="text" placeholder="Tahun Masuk Input" formControlName="txtTahunMasuk" [(ngModel)]="item.tahunmasuk"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label color="primary" stacked>Judul Skripsi</ion-label>
-        <ion-input type="text" placeholder="Judul Skripsi Input" formControlName="txtJudulSKripsi" [(ngModel)]="item.judulskripsi"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label color="primary" stacked>Kategori 1</ion-label>
-        <ion-select [(ngModel)]="item.kategori1" placeholder="Kategori Select" formControlName="selKategori1">
-          <div *ngFor="let item of itemsK">
-            <ion-option value="{{item.value}}" *ngIf="item.value != item.kategori2 && item.value != item.kategori3">{{item.name}}&nbsp;[
-              <p style="color:red;">{{item.detail}}</p>]</ion-option>
-          </div>
+        <ion-label color="primary" stacked>Kelas</ion-label>
+        <ion-select [(ngModel)]="item.kelas" placeholder="Kelas" formControlName="selKelas">
+          <ion-option value="A">A</ion-option>
+          <ion-option value="B">B</ion-option>
+          <ion-option value="C">C</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label color="primary" stacked>Kategori 2</ion-label>
-        <ion-select [(ngModel)]="item.kategori2" placeholder="Kategori Select" formControlName="selKategori2">
-          <div *ngFor="let item of itemsK">
-            <ion-option value="{{item.value}}" *ngIf="item.value != item.kategori1 && item.value != item.kategori3">{{item.name}}&nbsp;[
-              <p style="color:red;">{{item.detail}}</p>]</ion-option>
-          </div>
+        <ion-label color="primary" stacked>Periode</ion-label>
+        <ion-select [(ngModel)]="item.periode" placeholder="Periode" formControlName="selPeriode">
+          <ion-option value="2016">2016</ion-option>
+          <ion-option value="2017">2017</ion-option>
+          <!-- <ion-option value="P2K">P2K</ion-option> -->
         </ion-select>
       </ion-item>
-
       <ion-item>
-        <ion-label color="primary" stacked>Kategori 3</ion-label>
-        <ion-select [(ngModel)]="item.kategori3" placeholder="Kategori Select" formControlName="selKategori3">
-          <div *ngFor="let item of itemsK">
-            <ion-option value="{{item.value}}" *ngIf="item.value != item.kategori2 && item.value != item.kategori1">{{item.name}}&nbsp;[
-              <p style="color:red;">{{item.detail}}</p>]</ion-option>
-          </div>
+        <ion-label color="primary" stacked>Peminatan</ion-label>
+        <ion-select [(ngModel)]="selPeminatan" placeholder="Peminatan Mahasiswa" formControlName="selPeminatan">
+          <ion-option value="Rekayasa Perangkat Lunak (RPL)">Rekayasa Perangkat Lunak (RPL)</ion-option>
+          <ion-option value="Jaringan">Jaringan</ion-option>
+          <ion-option value="Artificial Intelegence (AI)">Artificial Intelegence (AI)</ion-option>
         </ion-select>
       </ion-item>
+      <div class="linedashed">
+        <ion-item>
+          <ion-label color="primary">Pilih kesesuaian materi Tugas Akhir :</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" stacked>Judul Tugas Akhir</ion-label>
+          <ion-input type="text" placeholder="Judul Skripsi Input" formControlName="txtJudulSKripsi" [(ngModel)]="item.judulskripsi"></ion-input>
+        </ion-item>
 
+        <ion-item>
+          <ion-label color="primary" stacked>Materi 1</ion-label>
+          <ion-select [(ngModel)]="item.kategori1" placeholder="Materi Select" formControlName="selKategori1">
+            <div *ngFor="let item of itemsK">
+              <ion-option value="{{item.value}}" *ngIf="item.value != item.kategori2 && item.value != item.kategori3">{{item.name}}&nbsp;[
+                <p style="color:red;">{{item.detail}}</p>]</ion-option>
+            </div>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" stacked>Materi 2</ion-label>
+          <ion-select [(ngModel)]="item.kategori2" placeholder="Materi Select" formControlName="selKategori2">
+            <div *ngFor="let item of itemsK">
+              <ion-option value="{{item.value}}" *ngIf="item.value != item.kategori1 && item.value != item.kategori3">{{item.name}}&nbsp;[
+                <p style="color:red;">{{item.detail}}</p>]</ion-option>
+            </div>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" stacked>Materi 3</ion-label>
+          <ion-select [(ngModel)]="item.kategori3" placeholder="Materi Select" formControlName="selKategori3">
+            <div *ngFor="let item of itemsK">
+              <ion-option value="{{item.value}}" *ngIf="item.value != item.kategori2 && item.value != item.kategori1">{{item.name}}&nbsp;[
+                <p style="color:red;">{{item.detail}}</p>]</ion-option>
+            </div>
+          </ion-select>
+        </ion-item>
+      </div>
     </ion-list>
     <button ion-button round [disabled]="!myForm.valid">Ubah</button>
   </form>

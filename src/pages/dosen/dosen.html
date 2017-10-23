@@ -17,37 +17,33 @@
     Daftar Dosen Pembimbing<br>
     <p>Total : {{itemTot}}</p>
   </ion-item-divider>
-  <ion-item>
-    <table border="1" width="100%" style="padding:2px">
-      <tr style="text-align:center;height: 50px;background-color: lightgreen;">
-        <td></td>
-        <td>NIM</td>
-        <td>Nama</td>
-        <td>Telephone</td>
-        <td>Aksi</td>
-      </tr>
-      <tr *ngFor="let item of items" style="text-align:center">
-        <td style="align:center;">
-          <ion-avatar item-left>
-            <img src="assets/img/{{item.pictures}}" onerror="this.src='assets/img/no-photo.gif'" />
-          </ion-avatar>
-        </td>
-        <td>
-          <p>{{item.nidn}}</p>
-        </td>
-        <td>
-          <P>{{item.nama}}</P>
-        </td>
-        <td>
-          <P>{{item.telephone}}</P>
-        </td>
-        <td>
-          <button ion-button outline item-end (click)="EditDosen(item)"><ion-icon name="create"></ion-icon></button>
-        </td>
-      </tr>
-    </table>
-  </ion-item>
-  <!-- </ion-content> -->
+  <!--  -->
+  <ion-grid>
+    
+    <ion-row class="row header">
+      <ion-col col-2 class="col" width="5px">NO</ion-col>
+      <ion-col col-2 class="col"></ion-col>
+      <ion-col col-2 class="col">NIDN</ion-col>
+      <ion-col col-2 class="col">NAMA</ion-col>
+      <ion-col col-2 class="col">NO. TELEPHONE</ion-col>
+      <ion-col col-2 class="col">AKSI</ion-col>
+    </ion-row>
+
+    <ion-row class="row" *ngFor="let item of items; let i = index" text-wrap>
+      <ion-col col-2 class="col">{{i+1}}</ion-col>
+      <ion-col col-2 class="col">
+        <ion-avatar item-left>
+          <img src="assets/img/{{item.pictures}}" onerror="this.src='assets/img/no-photo.gif'" />
+        </ion-avatar>
+      </ion-col>
+      <ion-col col-2 class="col">{{item.nidn}}</ion-col>
+      <ion-col col-2 class="col">{{item.nama}}</ion-col>
+      <ion-col col-2 class="col">{{item.telephone}}</ion-col>
+      <ion-col col-2 class="col"><button ion-button outline item-end (click)="EditDosen(item)"><ion-icon name="create"></ion-icon></button></ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <!--  -->
   <!--  -->
   <ion-fab bottom right>
     <button ion-fab mini (click)="AddDosen();"><ion-icon name="add"></ion-icon></button>

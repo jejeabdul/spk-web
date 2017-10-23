@@ -1,3 +1,4 @@
+import { TviewgroupdataApi } from './../../shared/sdk/services/custom/Tviewgroupdata';
 import { TbHistoriKlasifikasiApi } from './../../shared/sdk/services/custom/TbHistoriKlasifikasi';
 import { TmDosenApi } from './../../shared/sdk/services/custom/TmDosen';
 import { TmMahasiswaApi } from './../../shared/sdk/services/custom/TmMahasiswa';
@@ -7,8 +8,10 @@ import { TbKriteriaApi } from './../../shared/sdk/services/custom/TbKriteria';
 import { TmFungsionalDosenApi } from './../../shared/sdk/services/custom/TmFungsionalDosen';
 import { TmPendidikanDosenApi } from './../../shared/sdk/services/custom/TmPendidikanDosen';
 import { TmviewhistorykriteriaApi } from './../../shared/sdk/services/custom/Tmviewhistorykriteria';
-import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { Component, Inject } from '@angular/core';
+import { NavController, NavParams, LoadingController, Events, AlertController } from 'ionic-angular';
+import { LoopBackAuth } from '../../shared/sdk/services/core/auth.service';
+import { LoopBackConfig } from '../../shared/sdk';
 
 /**
  * Generated class for the KlasifikasiPage page.
@@ -21,8 +24,13 @@ import { NavController, NavParams, LoadingController, Events } from 'ionic-angul
   templateUrl: 'klasifikasi.html',
 })
 export class KlasifikasiPage {
+  method: string = "klasifikasi";
   items: any = [];
   itemsDSN: any = [];
+  itemReport: any = [];
+  setPeriodeR: any;
+  setKelas: any;
+  setPeriode: any;
   arrPend: any = [];
   arrFunc: any = [];
   arrDeatil: any = [];
@@ -38,6 +46,7 @@ export class KlasifikasiPage {
   max_kat3: any = 0;
   max_kuota: any = 0;
   max_kuotaBayes: any = 0;
+  logmhsbayes: any = 0;
   arrkuota: any = [];
 
   loading: any;
@@ -47,8 +56,9 @@ export class KlasifikasiPage {
   arrDsnBayes: any;
   idxMhsBayes: any;
   idxDsnBayes: any;
-
+  setPeriodeKlasifikasi: any;
   constructor(
+    @Inject(LoopBackAuth) protected auth: LoopBackAuth,
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
@@ -61,7 +71,9 @@ export class KlasifikasiPage {
     public tbDetailKomptensiDosenApi: TbDetailKomptensiDosenApi,
     public tmMahasiswaApi: TmMahasiswaApi,
     public tmDosenApi: TmDosenApi,
-    public tbHistoriKlasifikasiApi: TbHistoriKlasifikasiApi
+    public tbHistoriKlasifikasiApi: TbHistoriKlasifikasiApi,
+    public tviewgroupdataApi: TviewgroupdataApi,
+    private alertCtrl: AlertController
   ) {
 
     this.loadViewHistoriKriteria();
@@ -75,7 +87,11 @@ export class KlasifikasiPage {
   // |||||||||||||||||||||||||||||||||| BEGIN KLASIFIKASI DOSEN |||||||||||||||||||||||||||||||||||
   loadMahasiswa() {
     // mhs
-    this.tmMahasiswaApi.find().subscribe(val => {
+    this.tmMahasiswaApi.find({
+      where:{
+        and:[{proses : 0},{periode : this.setPeriodeKlasifikasi}]
+      }
+    }).subscribe(val => {
       this.arrMhs = val;
     });
   }
@@ -268,6 +284,30 @@ export class KlasifikasiPage {
         });
       });
     });
+  }
+
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Klasifikasi',
+      message: 'Apakah kamu setuju proses SAW?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('No');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('Yes');
+            this.doKlasifikasi();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   doKlasifikasi() {
@@ -489,20 +529,19 @@ export class KlasifikasiPage {
           where: {
             idMahasiswa: val[a]['id'],
             hasil: 1
-          }, order: 'namamhs ASC'
+          }, order: 'id_fungsional DESC, bobot DESC'
         }).subscribe(value => {
+          console.log(value, 'jj')
           if (value.length != 0) {
             this.itemsDSN.push({
               pictures: val[a]['pictures'],
               nim: val[a]['nim'],
               nama: val[a]['nama'],
+              telephone: val[a]['telephone'],
               judulskripsi: val[a]['judulskripsi'],
               dosen: value
             });
-          } else {
-            this.items = [];
           }
-          console.log(this.items, 'inidata hasil');
         });
       }
       loader.dismiss().then(
@@ -716,9 +755,37 @@ export class KlasifikasiPage {
   valReject => where: { and: [{ hasil: 0 }, { proses: 1 }] }
   bobottemp = (resAccept / resReject)*(this.max_kuotaBayes-dataKuotaDsn.length);
   */
+  presentConfirmBayes() {
+    let alert = this.alertCtrl.create({
+      title: 'Klasifikasi',
+      message: 'Apakah kamu setuju proses Klasifikasi?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('No');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('Yes');
+            this.loadMhsBayes001();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 
   loadMhsBayes001() {
-    var currentperiode = 2017;
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait, Proses Klasifikasi Dosen Pembimbing...'
+    });
+    this.loading.present();
+    var currentperiode = this.setPeriodeKlasifikasi;
     this.tmMahasiswaApi.find(
       { where: { periode: currentperiode } }
     ).subscribe(mhsPrd => {
@@ -726,14 +793,28 @@ export class KlasifikasiPage {
       ).subscribe(dsnPrd => {
         this.max_kuotaBayes = Math.ceil(mhsPrd.length / dsnPrd.length);
         this.max_kuotaBayes = isNaN(this.max_kuotaBayes) ? 0 : this.max_kuotaBayes;
+        console.log("max_kuotaBayes=",this.max_kuotaBayes);
         this.tmMahasiswaApi.find(
           { where: { and: [{ periode: currentperiode }, { proses: 0 }] } }
         ).subscribe(val => {
-          this.arrMhsBayes = val;
-          this.idxMhsBayes = 0;
-          this.doLoopMhsBayes001();
+          if (val.length) {
+            this.arrMhsBayes = val;
+            this.idxMhsBayes = 0;
+            this.doLoopMhsBayes001();
+          } else {
+            this.loading.dismiss().then(
+              rest => {
+                let alert = this.alertCtrl.create({
+                  title: 'Perhatian!',
+                  subTitle: 'Data sudah diproses semua, Thanks.',
+                  buttons: ['Okey']
+                });
+                alert.present();
+              });
+          }
         });
       });
+
     });
   }
 
@@ -832,17 +913,25 @@ export class KlasifikasiPage {
                             ).subscribe(dataKuotaDsn => {
                               // console.log(dataKuotaDsn.length, 'dataKuotaDsn');
 
-                              console.log(arrAccept, 'arrAccept');
-                              console.log(arrReject, 'arrRejectarrReject');
+                              if(this.logmhsbayes==this.idxMhsBayes){
+                                console.log(arrAccept, 'arrAccept');
+                                console.log(arrReject, 'arrRejectarrReject');
+                              }
+                              //console.log(arrAccept, 'arrAccept');
+                              //console.log(arrReject, 'arrRejectarrReject');
                               for (let b = 0; b < arrAccept.length; b++) {
                                 resAccept *= (arrAccept[b] / valAccept);
                               }
                               for (let c = 0; c < arrReject.length; c++) {
                                 resReject *= (arrReject[c] / valReject);
                               }
-                              console.log(valAccept, 'valAccept', resAccept, 'resAccept', valReject, 'valReject', resReject, 'resReject');
+                              if(this.logmhsbayes==this.idxMhsBayes){
+                                console.log(valAccept, 'valAccept', resAccept, 'resAccept', valReject, 'valReject', resReject, 'resReject');
+                              }
                               var bobottemp = (resAccept / resReject) * (this.max_kuotaBayes - dataKuotaDsn.length);
-                              console.log(bobottemp, 'lalalalaa');
+                              if(this.logmhsbayes==this.idxMhsBayes){
+                                console.log(bobottemp, 'lalalalaa');
+                              }
                               // update history berdasarkan idmhsinputan yg diupdate bobot=bobot nya
                               this.tbHistoriKlasifikasiApi.find({
                                 where: {
@@ -862,7 +951,10 @@ export class KlasifikasiPage {
                                       //this.doProsesDSN();
                                       if (this.idxMhsBayes == this.arrMhsBayes.length - 1 && this.idxDsnBayes == this.arrDsnBayes.length - 1) {
                                         this.UpdateHasil(this.arrMhsBayes[this.idxMhsBayes]['id'], true);
-                                        console.log("selesai");
+                                        this.loading.dismiss().then(
+                                          rest => {
+                                            console.log("selesai");
+                                          });
                                       } else if (this.idxDsnBayes == this.arrDsnBayes.length - 1) {
                                         this.UpdateHasil(this.arrMhsBayes[this.idxMhsBayes]['id'], true);
                                         this.idxMhsBayes += 1;
@@ -871,7 +963,7 @@ export class KlasifikasiPage {
                                         this.idxDsnBayes += 1;
                                         this.doLoopDsnBayes001();
                                       }
-                                      console.log('sukses update cuy');
+                                      //console.log('sukses update cuy');
                                     });
                                 } else {
                                   this.tbHistoriKlasifikasiApi.create({
@@ -882,7 +974,10 @@ export class KlasifikasiPage {
                                   }).subscribe(res => {
                                     if (this.idxMhsBayes == this.arrMhsBayes.length - 1 && this.idxDsnBayes == this.arrDsnBayes.length - 1) {
                                       this.UpdateHasil(this.arrMhsBayes[this.idxMhsBayes]['id'], true);
-                                      console.log("selesai");
+                                      this.loading.dismiss().then(
+                                        rest => {
+                                          console.log("selesai");
+                                        });
                                     } else if (this.idxDsnBayes == this.arrDsnBayes.length - 1) {
                                       this.UpdateHasil(this.arrMhsBayes[this.idxMhsBayes]['id'], true);
                                       this.idxMhsBayes += 1;
@@ -891,7 +986,7 @@ export class KlasifikasiPage {
                                       this.idxDsnBayes += 1;
                                       this.doLoopDsnBayes001();
                                     }
-                                    console.log('sukses insert cuy');
+                                    //console.log('sukses insert cuy');
                                   })
                                 }
                               });
@@ -1517,6 +1612,94 @@ export class KlasifikasiPage {
           });
         });
       });
+    });
+  }
+
+  // report
+  // loadReport() {
+  //   this.tmviewhistorykriteriaApi.find({
+  //     where: {
+  //       and:
+  //       [{ kelas: this.setKelas }, { periode: this.setPeriode }]
+  //     }
+  //   }).subscribe(val => {
+  //     console.log(val, 'isiii');
+  //   });
+  // }
+  loadReport() {
+    // this.tmviewhistorykriteriaApi.find({
+    //   where: {
+    //     and:
+    //     [{ hasil: 1 }, { periode: this.setPeriode }]
+    //   }
+    // }).subscribe(val => {
+    //   console.log(val, 'isiii');
+    //   // this.itemReport = val;
+    //   if (val.length != 0) {
+    //     for (let a = 0; a < val.length; a++) {
+    //       this.itemReport.push({
+    //         pictures: val[a]['pictures'],
+    //         nim: val[a]['nim'],
+    //         nama: val[a]['nama'],
+    //         judulskripsi: val[a]['judulskripsi'],
+    //         // dosen: value
+    //       });
+    //     }
+    //     console.log(this.itemReport, 'this.itemReportthis.itemReport');
+
+    //   } else {
+    //     this.itemReport = [];
+    //   }
+    // });
+    let loader = this.loadingCtrl.create({
+      content: 'loading data ...'
+    });
+    loader.present();
+    this.tmMahasiswaApi.find().subscribe(val => {
+
+      for (let a = 0; a < val.length; a++) {
+        this.tmviewhistorykriteriaApi.find({
+          where: {
+            and: [
+              { idMahasiswa: val[a]['id'] }, { hasil: 1 },
+              { periode: this.setPeriode }]
+          }, order: 'id_fungsional DESC, bobot DESC'
+        }).subscribe(value => {
+          if (value.length != 0) {
+            this.itemReport.push({
+              pictures: val[a]['pictures'],
+              nim: val[a]['nim'],
+              nama: val[a]['nama'],
+              telephone: val[a]['telephone'],
+              judulskripsi: val[a]['judulskripsi'],
+              dosen: value
+            });
+          }
+        });
+      }
+      loader.dismiss().then(
+        rest => {
+          console.log(this.itemReport, 1111)
+        });
+
+    });
+  }
+  // excel
+  loadReportExcel() {
+    console.log(this.setPeriode, 'this.setPeriodeRthis.setPeriodeR', this.auth.getToken());
+    let url = LoopBackConfig.getPath() + '/api/Tmviewhistorykriteria/exportExcel?periode=' + this.setPeriode + '&access_token=' + this.auth.getToken().id;
+    window.location.href = url;
+  }
+
+  // ratarata
+  loadRata() {
+    this.tviewgroupdataApi.find({
+      where: {
+        periode: this.setPeriodeR
+      }
+    }).subscribe(val => {
+      console.log(val, 'rata', this.setPeriodeR);
+
     });
   }
 

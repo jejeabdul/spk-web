@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { TbCalendarApi } from './../../shared/sdk/services/custom/TbCalendar';
 import { FormEventPage } from './form-event/form-event';
 import { Component } from '@angular/core';
@@ -38,7 +39,8 @@ export class MyCalendarPage {
     private tbCalendarApi: TbCalendarApi,
     private actionsheetCtrl: ActionSheetController,
     public events: Events,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public storage: Storage,
 
   ) {
     events.subscribe('event:add', (event) => {
@@ -83,42 +85,44 @@ export class MyCalendarPage {
   getEventPublic(): void {
     let loader = this.loadingCtrl.create();
     loader.present();
-    this.tbCalendarApi.find({
-      where: {
-        userid: 1,
-        startDate: { gte: this.startDate },
-        endDate: { lte: this.endDate }
-      }
-    }).subscribe(results => {
-      console.log(results, 'jj');
-      loader.dismiss().then(
-        value => {
-          for (let result of results) {
+    this.storage.get('stuserid').then((stuserid) => {
+      this.tbCalendarApi.find({
+        where: {
+          userid: stuserid,
+          startDate: { gte: this.startDate },
+          endDate: { lte: this.endDate }
+        }
+      }).subscribe(results => {
+        console.log(results, 'jj');
+        loader.dismiss().then(
+          value => {
+            for (let result of results) {
 
-            let startDate = moment(result['startDate']);
-            let endDate = moment(result['endDate']);
-            if (result['allDay'].data[0]) {
-              startDate = moment.utc(moment(result['startDate']).format("YYYY-MM-DD HH:mm"));
-              endDate = moment.utc(moment(result['endDate']).format("YYYY-MM-DD HH:mm"));
+              let startDate = moment(result['startDate']);
+              let endDate = moment(result['endDate']);
+              if (result['allDay'].data[0]) {
+                startDate = moment.utc(moment(result['startDate']).format("YYYY-MM-DD HH:mm"));
+                endDate = moment.utc(moment(result['endDate']).format("YYYY-MM-DD HH:mm"));
+              }
+
+              this.data.push({
+                id: result['id'],
+                title: result['subject'],
+                notes: result['description'],
+                startTime: startDate.toDate(),
+                endTime: endDate.toDate(),
+                allDay: (result['allDay'].data[0] == 1) ? true : false,
+                server: true
+              });
             }
 
-            this.data.push({
-              id: result['id'],
-              title: result['subject'],
-              notes: result['description'],
-              startTime: startDate.toDate(),
-              endTime: endDate.toDate(),
-              allDay: (result['allDay'].data[0] == 1) ? true : false,
-              server: true
-            });
-          }
-
-          // Show event
-          this.eventSource = this.data;
-        });
-    }, (error) => {
-      console.log(error);
-      loader.dismiss();
+            // Show event
+            this.eventSource = this.data;
+          });
+      }, (error) => {
+        console.log(error);
+        loader.dismiss();
+      });
     });
   }
 

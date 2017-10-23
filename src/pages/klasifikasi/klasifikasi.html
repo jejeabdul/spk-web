@@ -12,68 +12,187 @@
     </button>
     <ion-title>Klasifikasi</ion-title>
   </ion-navbar>
-
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="method" color="secondary">
+      <ion-segment-button value="klasifikasi">
+        Klasifikasi
+      </ion-segment-button>
+      <ion-segment-button value="report">
+        Report
+      </ion-segment-button>
+      <!-- <ion-segment-button value="ratarata">
+        Rata-rata
+      </ion-segment-button> -->
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-  <button ion-button block (click)="doKlasifikasi()">PROSES KLASIFIKASI</button>
-   <button (click)="loadMhsBayes001()">proses bayes1</button> 
-   <button (click)="loadMhsBayes002()">proses bayes2</button> 
-   <button (click)="loadMhsBayes003()">proses bayes3</button> 
-   <button (click)="loadMhsBayes004()">proses bayes4</button> 
-    <ion-grid>
-    <ion-item-divider>
-      List Klasifikasi
-    </ion-item-divider>
-    <ion-item *ngFor="let item of items">
-      <ion-row>
-        <ion-col>
-          <ion-avatar item-left>
-            <img src="assets/img/{{item.pictures}}" onerror="this.src='assets/img/no-photo.gif'" />
-          </ion-avatar>
-          <p><b>NIM : </b>{{item.nim}}</p>
-          <p><b>Nama Mahasiswa : </b>{{item.nama}}</p>
-          <p><b>Judul Skripsi : </b>{{item.judulskripsi}}</p>
-          <p><b>Pembimbing 1 :</b>{{item.dosen[0]?.namadsn}} [ {{item.dosen[0]?.telephone}} ] <!--{{item.dosen[0]?.bobot}}--></p>
-          <p><b>Pembimbing 2 :</b>{{item.dosen[1]?.namadsn}} [ {{item.dosen[1]?.telephone}} ] <!--{{item.dosen[1]?.bobot}}--></p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-grid>  
-  <!-- <ion-grid>
-  <ion-item-divider>
-    List Klasifikasi
-  </ion-item-divider>
-  <ion-item>
-    <table border="1" width="100%" style="padding:2px">
-      <tr style="text-align:center;height: 50px;background-color: lightgreen;">
-        <td rowspan="2"></td>
-        <td rowspan="2">NIM</td>
-        <td rowspan="2">Nama</td>
-        <td rowspan="2">Judul Skripsi</td>
-        <td colspan="2">Pembimbing</td>
-        <td rowspan="2">Aksi</td>
-      </tr>
-      <tr>
-        <td>Pembimbing I</td>
-        <td>Pembimbing II</td>
-      </tr>
-      <tr *ngFor="let item of items" style="text-align:center">
-        <td>
-          <ion-avatar item-left>
-            <img src="assets/img/{{item.pictures}}" onerror="this.src='assets/img/no-photo.gif'" />
-          </ion-avatar>
-        </td>
-        <td>{{item.nim}}</td>
-        <td>{{item.nama}}</td>
-        <td style="width:40px;
-    font-size:12px;word-break:break-all">{{item.judulskripsi}}</td>
-        <td>{{item.dosen[0]?.namadsn}} [ {{item.dosen[0]?.telephone}} ] {{item.dosen[0]?.bobot}}</td>
-        <td>{{item.dosen[1]?.namadsn}} [ {{item.dosen[1]?.telephone}} ] {{item.dosen[0]?.bobot}}</td>
-      </tr>
+  <!--klasifikasi  -->
+  <div [ngSwitch]="method">
+    <div *ngSwitchCase="'klasifikasi'">
+      <ion-grid>
+        <ion-item-divider>
+          List Klasifikasi
+        </ion-item-divider>
+        <ion-row text-center>
+          <!-- <ion-col> -->
+          <ion-item>
+            <ion-label color="secondary" stacked>Periode</ion-label>
+            <ion-select [(ngModel)]="setPeriodeKlasifikasi" placeholder="Periode">
+              <ion-option value="2016">2016</ion-option>
+              <ion-option value="2017">2017</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-col style="border: solid 0px">
+              <button (click)="presentConfirm()" ion-button color="secondary" [disabled]="!setPeriodeKlasifikasi"> <ion-icon name="flash"></ion-icon></button>
+            </ion-col>
+            <ion-col style="border: solid 0px">
+              <button ion-button (click)="presentConfirmBayes()" color="secondary" [disabled]="!setPeriodeKlasifikasi">PROSES KLASIFIKASI</button>
+            </ion-col>
+          </ion-item>
+          <!-- </ion-col> -->
+          <!-- <ion-col>
+            
+          </ion-col> -->
+        </ion-row>
+      </ion-grid>
+      <!-- <button (click)="loadMhsBayes001()">proses bayes1</button>
+      <button (click)="loadMhsBayes002()">proses bayes2</button>
+      <button (click)="loadMhsBayes003()">proses bayes3</button>
+      <button (click)="loadMhsBayes004()">proses bayes4</button> -->
 
-    </table>
-  </ion-item>
-  </ion-grid> -->
+
+      <!--  -->
+      <ion-grid>
+        <ion-row class="row header">
+          <ion-col col-2 class="col">NO</ion-col>
+          <ion-col col-2 class="col">NPM</ion-col>
+          <ion-col col-2 class="col">NAMA</ion-col>
+          <ion-col col-2 class="col">NO. TELEPHONE</ion-col>
+          <ion-col col-2 class="col">JUDUL PROPOSAL TUGAS AKHIR</ion-col>
+          <ion-col col-2 class="col">PEMBIMBING</ion-col>
+        </ion-row>
+
+        <ion-row class="row" *ngFor="let item of items; let i = index" text-wrap>
+          <ion-col col-2 class="col">{{i+1}}</ion-col>
+          <ion-col col-2 class="col">{{item.nim}}</ion-col>
+          <ion-col col-2 class="col">{{item.nama}}</ion-col>
+          <ion-col col-2 class="col">{{item.telephone}}</ion-col>
+          <ion-col col-2 class="col">{{item.judulskripsi}}</ion-col>
+          <ion-col col-2 class="col">1. {{item.dosen[0]?.namadsn}}<br> 2. {{item.dosen[1]?.namadsn}}</ion-col>
+        </ion-row>
+
+      </ion-grid>
+      <!--  -->
+    </div>
+  </div>
+
+  <!--report  -->
+  <div [ngSwitch]="method">
+    <div *ngSwitchCase="'report'">
+      <ion-grid>
+        <!-- <ion-item-divider>
+          Report
+        </ion-item-divider> -->
+        <ion-row text-center>
+          <!-- <ion-item>
+            <ion-label color="secondary" stacked>Kelas</ion-label>
+            <ion-select [(ngModel)]="setKelas" placeholder="Kelas">
+              <ion-option value="All">All</ion-option>              
+              <ion-option value="pagi">Kelas Pagi</ion-option>
+              <ion-option value="sore">Kelas Sore</ion-option>
+              <ion-option value="p2k">Kelas P2k</ion-option>              
+            </ion-select>
+          </ion-item> -->
+          <ion-item>
+            <ion-label color="secondary" stacked>Periode</ion-label>
+            <ion-select [(ngModel)]="setPeriode" placeholder="Periode">
+              <ion-option value="2016">2016</ion-option>
+              <ion-option value="2017">2017</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-col style="border: solid 0px">
+              <button ion-button (click)="loadReport()" color="secondary" [disabled]="!setPeriode">Filter</button>
+            </ion-col>
+            <ion-col style="border: solid 0px">
+              <button ion-button (click)="loadReportExcel()" color="secondary" [disabled]="!setPeriode">Export to Excel</button>
+            </ion-col>
+
+          </ion-item>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngIf="itemReport.length != 0">
+        <ion-row class="row header">
+          <ion-col col-2 class="col">NO</ion-col>
+          <ion-col col-2 class="col">NPM</ion-col>
+          <ion-col col-2 class="col">NAMA</ion-col>
+          <ion-col col-2 class="col">NO. TELEPHONE</ion-col>
+          <ion-col col-2 class="col">JUDUL PROPOSAL TUGAS AKHIR</ion-col>
+          <ion-col col-2 class="col">PEMBIMBING</ion-col>
+        </ion-row>
+
+        <ion-row class="row" *ngFor="let item of itemReport; let i = index" text-wrap>
+          <ion-col col-2 class="col">{{i+1}}</ion-col>
+          <ion-col col-2 class="col">{{item.nim}}</ion-col>
+          <ion-col col-2 class="col">{{item.nama}}</ion-col>
+          <ion-col col-2 class="col">{{item.telephone}}</ion-col>
+          <ion-col col-2 class="col">{{item.judulskripsi}}</ion-col>
+          <ion-col col-2 class="col">1. {{item.dosen[0]?.namadsn}}<br> 2. {{item.dosen[1]?.namadsn}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+
+  <!--ratarata  -->
+  <!-- <div [ngSwitch]="method">
+    <div *ngSwitchCase="'ratarata'">
+      <ion-grid>
+        <ion-row text-center>
+           <ion-item>
+            <ion-label color="secondary" stacked>Kelas</ion-label>
+            <ion-select [(ngModel)]="setKelas" placeholder="Kelas">
+              <ion-option value="All">All</ion-option>              
+              <ion-option value="pagi">Kelas Pagi</ion-option>
+              <ion-option value="sore">Kelas Sore</ion-option>
+              <ion-option value="p2k">Kelas P2k</ion-option>              
+            </ion-select>
+          </ion-item> 
+          <ion-item>
+            <ion-label color="secondary" stacked>Periode</ion-label>
+            <ion-select [(ngModel)]="setPeriodeR" placeholder="Periode">
+              <ion-option value="2016">2016</ion-option>
+              <ion-option value="2017">2017</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <button ion-button (click)="loadRata()" color="secondary">Submit</button>
+          </ion-item>
+          <ion-item>
+
+          <table border="1" width="100%" style="padding:2px">
+            <tr style="text-align:center;height: 50px;background-color: lightgreen;">
+              <td>NO</td>
+              <td>NIDN</td>
+              <td>NAMA</td>
+              <td>RATA-RATA/ORANG</td>
+            </tr>
+            <tr *ngFor="let item of items; let i = index" style="text-align:center">
+              <td>{{i+1}}</td>
+              <td>{{item.nim}}A Segment is a group</td>
+              <td>{{item.nama}}A Segment is a group of buttons, sometimes</td>
+              <td>{{item.telephone}}</td>
+            </tr>
+
+          </table>
+        </ion-item>
+          
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div> -->
 </ion-content>

@@ -45,10 +45,12 @@ export class MahasiswaPage {
         where: {
           or: [
             { nim: { like: '%' + val + '%' } },
-            { nama: { like: '%' + val + '%' } }
+            { nama: { like: '%' + val + '%' } },
+            { kelas: { like: '%' + val + '%' } },
+            { periode: { like: '%' + val + '%' } }
           ]
 
-        }, order: "nama ASC",
+        }, order: "id DESC",
         limit: this.limit_member,
         skip: this.start_member
       }).subscribe(value => {
@@ -65,7 +67,7 @@ export class MahasiswaPage {
       });
     } else {
       this.tmMahasiswaApi.find({
-        order: "nama ASC",
+        order: "id DESC",
         limit: this.limit_member,
         skip: this.start_member
       }).subscribe(value => {

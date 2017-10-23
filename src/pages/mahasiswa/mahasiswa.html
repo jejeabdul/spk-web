@@ -22,7 +22,7 @@
   <ion-item-divider>
     Daftar Mahasiswa
   </ion-item-divider>
-  <ion-item>
+  <!-- <ion-item>
     <table border="1" width="100%" style="padding:2px">
       <tr style="text-align:center;height: 50px;background-color: lightgreen;">
         <td></td>
@@ -41,21 +41,50 @@
         <td>
           <p>{{item.nim}}</p>
         </td>
-        <td>
+        <td text-wrap>
           <P>{{item.nama}}</P>
         </td>
         <td>
           <P>{{item.kelas}}</P>
         </td>
         <td>
-          <P>{{item.tahunmasuk}}</P>
+          <P>{{item.periode}}</P>
         </td>
         <td>
           <button ion-button outline item-end (click)="doEditMhs(item.nim);"><ion-icon name="create"></ion-icon></button>
         </td>
       </tr>
     </table>
-  </ion-item>
+  </ion-item> -->
+  <!--  -->
+  <ion-grid>
+
+    <ion-row class="row header">
+      <ion-col col-2 class="col" width="5px">NO</ion-col>
+      <!-- <ion-col col-2 class="col"></ion-col> -->
+      <ion-col col-2 class="col">NIM</ion-col>
+      <ion-col col-2 class="col">NAMA</ion-col>
+      <ion-col col-2 class="col">KELAS</ion-col>
+       <ion-col col-2 class="col">PERIODE</ion-col> 
+      <ion-col col-2 class="col">AKSI</ion-col>
+    </ion-row>
+
+    <ion-row class="row" *ngFor="let item of items; let i = index" text-wrap>
+      <ion-col col-2 class="col">{{i+1}}</ion-col>
+      <!-- <ion-col col-2 class="col">
+        <ion-avatar item-left>
+          <img src="assets/img/{{item.pictures}}" onerror="this.src='assets/img/no-photo.gif'" />
+        </ion-avatar>
+      </ion-col> -->
+      <ion-col col-2 class="col">{{item.nim}}</ion-col>
+      <ion-col col-2 class="col">{{item.nama}}</ion-col>
+      <ion-col col-2 class="col">{{item.kelas}}</ion-col>
+       <ion-col col-2 class="col">{{item.periode}}</ion-col> 
+      <ion-col col-2 class="col"><button ion-button outline item-end (click)="doEditMhs(item.nim);"><ion-icon name="create"></ion-icon></button></ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <!--  -->
 
   <ion-fab bottom right>
     <button ion-fab mini (click)="doAddMhs();"><ion-icon name="add"></ion-icon></button>

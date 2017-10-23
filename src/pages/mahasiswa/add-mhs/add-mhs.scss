@@ -1,3 +1,19 @@
 page-add-mhs {
-    
+    .alert-wrapper {
+        min-width: 650px;
+    }
+    .myCustomSelect{
+    max-width: 100% !important;
+    }
+    .linedashed{
+        border-top-style: dashed;
+        border-left-style: dashed;
+        border-bottom-style: dashed;
+        border-right-style: dashed;
+        color: gray;
+        border-width: thin;
+        }
 }
+.alert-wrapper {
+        min-width: 650px;
+    }

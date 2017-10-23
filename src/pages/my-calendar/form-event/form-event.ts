@@ -26,6 +26,7 @@ export class FormEventPage {
   idEv: any = '';
   dateSelected: any;
   flag: any = 0;
+  setStuserid:any;
 
   constructor(
     public navCtrl: NavController,
@@ -37,6 +38,9 @@ export class FormEventPage {
     public storage: Storage,
     private toastCtrl: ToastController
   ) {
+    this.storage.get('stuserid').then((stuserid) => {
+      this.setStuserid = stuserid;
+    });
     this.eventDetail = this.navParams.get('event');
     this.flag = this.navParams.get('flag');
     this.dateSelected = this.navParams.get('date');
@@ -148,15 +152,16 @@ export class FormEventPage {
     if (this.eventDetail) {
       this.idEv = this.eventDetail.id;
     }
-    let data = {
-      id: this.idEv,
-      subject: this.eventData['title'],
-      description: this.eventData['notes'],
-      startDate: this.eventData['startFrom'],
-      endDate: this.eventData['endFrom'],
-      allDay: this.eventData['allDay'] ? 1 : 0,
-      userid: 1
-    }
+    
+      let data = {
+        id: this.idEv,
+        subject: this.eventData['title'],
+        description: this.eventData['notes'],
+        startDate: this.eventData['startFrom'],
+        endDate: this.eventData['endFrom'],
+        allDay: this.eventData['allDay'] ? 1 : 0,
+        userid: this.setStuserid
+      }
 
     // Checing if it's update or create new
     if (this.isUpdate) {
